@@ -4,11 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2699FB"
     tools:context=".RehberActivity">
 
-    <ListView
+    <Button
+        android:id="@+id/read_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yenile"
+        android:background="@drawable/layout_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="16dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/contact_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="109dp"
-        tools:layout_editor_absoluteY="309dp" />
+        android:layout_below="@+id/read_contact"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
