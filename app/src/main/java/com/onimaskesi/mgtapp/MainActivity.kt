@@ -61,6 +61,12 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
+    fun Go_click(view: View){
+        val intent = Intent(applicationContext,AnaSayfaActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     fun girisYap_click(view : View){
         val telefon = PhoneTxt.text.toString()
         val parola = ParolaTxt.text.toString()

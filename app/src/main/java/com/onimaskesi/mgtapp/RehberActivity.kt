@@ -11,30 +11,47 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_rehber.*
 import kotlinx.android.synthetic.main.contact_child.view.*
 
 class RehberActivity : AppCompatActivity() {
 
+    private lateinit var db : FirebaseFirestore
+    val userList : MutableList<ContactDTO> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rehber)
 
+        db = FirebaseFirestore.getInstance()
+
         contact_list.layoutManager = LinearLayoutManager(this)
 
-        read_contact.setOnClickListener {
-            //izin kontrolleri
+        val contactList : MutableList<ContactDTO> = ArrayList()
 
-            val contactList : MutableList<ContactDTO> = ArrayList()
-            val contacts = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,null,null,null)
+        val contacts = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,null,null,null)
 
-            while (contacts?.moveToNext()!!){
-                val name = contacts.getString(contacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
-                val number = contacts.getString(contacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+        while (contacts?.moveToNext()!!){
+
+            val name = contacts.getString(contacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+            var number = contacts.getString(contacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+
+            if(number.get(0) == '+'){ //+90 ile başlayanları düzenleme
+
+                number = number.substring(3)
+
+            }else if(number.get(0) == '0'){ //0 ile başlayanları düzenleme
+                number = number.substring(1)
+            }
+
+            if(number.length == 10){
+
                 val obj = ContactDTO()
                 obj.name = name
                 obj.number = number
@@ -46,11 +63,38 @@ class RehberActivity : AppCompatActivity() {
 
                 contactList.add(obj)
             }
-            contacts.close()
-            contact_list.adapter = ContactAdapter(contactList,this)
 
         }
+        contacts.close()
 
+        for(contact in contactList){
+
+            val docRef = db.collection("Kullanici").document(contact.number)
+            docRef.get().addOnSuccessListener { document ->
+
+                if (document.get("telefon") != null && document.get("parola") != null){
+
+                    val obj = ContactDTO()
+                    obj.name = contact.name
+                    obj.number = contact.number
+                    obj.image = contact.image
+
+                    userList.add(obj)
+                }
+            }
+        }
+
+        contact_list.adapter = ContactAdapter(userList,this)
+
+    }
+
+    fun yenile_click(view: View){
+        contact_list.adapter = ContactAdapter(userList,this)
+    }
+
+
+    private fun toast(msg: String){
+        Toast.makeText(this,msg, Toast.LENGTH_LONG).show()
     }
 
     class ContactAdapter(items : List<ContactDTO>,ctx: Context) : RecyclerView.Adapter<ContactAdapter.ViewHolder>(){

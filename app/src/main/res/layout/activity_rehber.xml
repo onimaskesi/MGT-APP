@@ -8,22 +8,23 @@
     tools:context=".RehberActivity">
 
     <Button
-        android:id="@+id/read_contact"
+        android:id="@+id/yenile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Yenile"
         android:background="@drawable/layout_bg"
+        android:onClick="yenile_click"
+        android:text="Yenile"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="16dp"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contact_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/read_contact"/>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,7 @@
         android:layout_width="185dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="1dp"
         android:text="Parola"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
@@ -44,7 +45,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="43dp"
         android:layout_marginEnd="43dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginBottom="22dp"
         android:background="@drawable/layout_bg"
         android:ems="10"
         android:inputType="phone"
@@ -61,6 +62,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="107dp"
+        android:layout_marginBottom="1dp"
         android:text="Telefon"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
@@ -87,13 +89,25 @@
         android:id="@+id/KayitOl"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="237dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/layout_bg"
         android:onClick="kayitOl_click"
         android:text="Kayıt ol"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/go"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Girisbtn" />
+
+    <Button
+        android:id="@+id/go"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="169dp"
+        android:onClick="Go_click"
+        android:text="Go"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/KayitOl"
+        app:layout_constraintTop_toBottomOf="@+id/KayitOl" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
