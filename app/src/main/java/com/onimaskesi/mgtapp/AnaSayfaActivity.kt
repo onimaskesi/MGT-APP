@@ -2,6 +2,7 @@ package com.onimaskesi.mgtapp
 
 import android.Manifest
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
@@ -16,12 +17,14 @@ class AnaSayfaActivity : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
     lateinit var Telefon: String
+    lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ana_sayfa)
 
         db = FirebaseFirestore.getInstance()
+        sharedPref = getSharedPreferences("mgt-shared",0)
 
         Telefon = intent.getStringExtra("tel") as String
     }
@@ -38,6 +41,8 @@ class AnaSayfaActivity : AppCompatActivity() {
         docRef.update("AktifMi", false)
             .addOnSuccessListener { toast( "Çıkış Yapıldı") }
             .addOnFailureListener { e -> toast( "Çıkış yapılamadı: ${e}") }
+
+        sharedPref.edit().putBoolean("giris",false).apply()
 
         var intent = Intent(applicationContext,MainActivity::class.java)
         startActivity(intent)

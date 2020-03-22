@@ -27,13 +27,14 @@ import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
     private lateinit var db : FirebaseFirestore
-    lateinit var sharedPreferences: SharedPreferences
+    lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         db = FirebaseFirestore.getInstance()
+        sharedPref = getSharedPreferences("mgt-shared",0)
 
         if(intent.getStringExtra("tel") != null){
             val tel = intent.getStringExtra("tel") as String
@@ -47,7 +48,15 @@ class MainActivity : AppCompatActivity() {
 
 
         //kullanıcı daha önce giriş yapmış ise tekrar giriş yapmaksızın  ana sayfaya yönlendirilir
+        if (sharedPref.getBoolean("giris", false)) {
 
+            val intent = Intent(this, AnaSayfaActivity::class.java)
+            val tel = sharedPref.getString("tel",null) as String
+            intent.putExtra("tel",tel)
+            startActivity(intent)
+            finish()
+
+        }
 
         //////////////
 
@@ -105,6 +114,9 @@ class MainActivity : AppCompatActivity() {
                             docRef.update("AktifMi", true)
                                 .addOnSuccessListener { toast( "Hoşgeldiniz :)") }
                                 .addOnFailureListener { e -> toast( "Hata: ${e}") }
+
+                            sharedPref.edit().putBoolean("giris",true).apply()
+                            sharedPref.edit().putString("tel",Telefon).apply()
 
                             val intent = Intent(applicationContext, AnaSayfaActivity:: class.java)
                             intent.putExtra("tel",Telefon)
