@@ -46,6 +46,7 @@ class ParolaOlusturmaActivity : AppCompatActivity() {
 
                 if(task.isSuccessful){
                     val intent = Intent(applicationContext, MainActivity::class.java)
+                    intent.putExtra("tel",phoneNumber)
                     startActivity(intent)
                     finish()
                 }

@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
             PhoneTxt.post(  Runnable(){
                 PhoneTxt.setText(tel)
             })
-            toast("Bu telefon numarasına kayıtlı bir hesap mevcuttur.")
 
         }
 
