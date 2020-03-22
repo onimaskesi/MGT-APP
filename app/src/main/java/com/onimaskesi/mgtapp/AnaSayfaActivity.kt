@@ -38,7 +38,6 @@ class AnaSayfaActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        toast(Telefon)
         makeOnlineTheUser()
     }
 

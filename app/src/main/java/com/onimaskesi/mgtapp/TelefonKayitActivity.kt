@@ -44,17 +44,21 @@ class TelefonKayitActivity : AppCompatActivity() {
     fun tamam_click(view : View){
         if(TelefonTxt.text != null){
             val docRef = db.collection("Kullanici").document(TelefonTxt.text.toString())
-            docRef.get().addOnSuccessListener {
-                toast("Bu telefon numarasına kayıtlı bir hesap mevcuttur.")
+            docRef.get().addOnSuccessListener { document ->
 
-                val intent = Intent(applicationContext, MainActivity::class.java)
-                intent.putExtra("tel",TelefonTxt.text.toString())
-                startActivity(intent)
-                finish()
+                if (document.get("telefon") != null){
+                    toast("Bu telefon numarasına kayıtlı bir hesap mevcuttur.")
 
-            }.addOnFailureListener {
-                OnayView()
-                verify()
+                    val intent = Intent(applicationContext, MainActivity::class.java)
+                    intent.putExtra("tel",TelefonTxt.text.toString())
+                    startActivity(intent)
+                    finish()
+                }else{
+                    OnayView()
+                    verify()
+                }
+
+
             }
         }
 

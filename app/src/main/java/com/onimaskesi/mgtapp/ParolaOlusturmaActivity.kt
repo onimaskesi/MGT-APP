@@ -35,14 +35,12 @@ class ParolaOlusturmaActivity : AppCompatActivity() {
 
             val phoneNumber = intent.getStringExtra("tel") as String
 
-
-
             val kullanici = db.collection("Kullanici")
 
             val data1 = hashMapOf(
                 "telefon" to phoneNumber,
                 "parola" to parola,
-                "AktifMi" to true
+                "AktifMi" to false
             )
             kullanici.document(phoneNumber).set(data1).addOnCompleteListener { task ->
 
