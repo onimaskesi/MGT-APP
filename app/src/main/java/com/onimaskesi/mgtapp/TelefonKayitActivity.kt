@@ -42,19 +42,22 @@ class TelefonKayitActivity : AppCompatActivity() {
 
 
     fun tamam_click(view : View){
-        val docRef = db.collection("Kullanici").document(TelefonTxt.text.toString())
-        docRef.get().addOnSuccessListener {
-            toast("Bu telefon numarasına kayıtlı bir hesap mevcuttur.")
+        if(TelefonTxt.text != null){
+            val docRef = db.collection("Kullanici").document(TelefonTxt.text.toString())
+            docRef.get().addOnSuccessListener {
+                toast("Bu telefon numarasına kayıtlı bir hesap mevcuttur.")
 
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            intent.putExtra("tel",TelefonTxt.text.toString())
-            startActivity(intent)
-            finish()
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                intent.putExtra("tel",TelefonTxt.text.toString())
+                startActivity(intent)
+                finish()
 
-        }.addOnFailureListener {
-            OnayView()
-            verify()
+            }.addOnFailureListener {
+                OnayView()
+                verify()
+            }
         }
+
 
     }
 

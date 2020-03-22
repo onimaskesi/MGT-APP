@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AnaSayfaActivity : AppCompatActivity() {
@@ -18,6 +19,7 @@ class AnaSayfaActivity : AppCompatActivity() {
     private lateinit var db: FirebaseFirestore
     lateinit var Telefon: String
     lateinit var sharedPref: SharedPreferences
+    lateinit var docRef : DocumentReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +29,42 @@ class AnaSayfaActivity : AppCompatActivity() {
         sharedPref = getSharedPreferences("mgt-shared",0)
 
         Telefon = intent.getStringExtra("tel") as String
+
+        docRef = db.collection("Kullanici").document(Telefon)
+
+        makeOnlineTheUser()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        toast(Telefon)
+        makeOnlineTheUser()
+    }
+
+    fun makeOfflineTheUser(){
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            if(documentSnapshot.get("AktifMi") != false){
+                docRef.update("AktifMi",false)
+            }
+        }
+
+    }
+
+    fun makeOnlineTheUser(){
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            if(documentSnapshot.get("AktifMi") != true){
+                docRef.update("AktifMi",true)
+            }
+        }
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) { //Arka planda olması
+        super.onSaveInstanceState(outState)
+        makeOfflineTheUser()
     }
 
     private fun toast(msg: String){
@@ -37,10 +75,7 @@ class AnaSayfaActivity : AppCompatActivity() {
     fun logOut_click(view : View){
         //auth.signOut()
 
-        val docRef = db.collection("Kullanici").document(Telefon)
-        docRef.update("AktifMi", false)
-            .addOnSuccessListener { toast( "Çıkış Yapıldı") }
-            .addOnFailureListener { e -> toast( "Çıkış yapılamadı: ${e}") }
+       makeOfflineTheUser()
 
         sharedPref.edit().putBoolean("giris",false).apply()
 

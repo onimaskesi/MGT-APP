@@ -77,7 +77,46 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+    /*
+    override fun onStart() {
+        super.onStart()
+        toast("onStart")
+    }
 
+    override fun onResume() {
+        super.onResume()
+        toast( "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        toast( "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        toast( "onStop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        toast( "onRestart")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        toast( "onDestroy")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) { //Arka planda olması
+        super.onSaveInstanceState(outState)
+        toast( "onSaveInstanceState")
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        toast( "onRestoreInstanceState")
+    }*/
 
 
     private fun toast(msg: String){
@@ -86,12 +125,6 @@ class MainActivity : AppCompatActivity() {
 
     fun kayitOl_click(view: View) {
         val intent = Intent(applicationContext,TelefonKayitActivity ::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    fun Go_click(view: View){
-        val intent = Intent(applicationContext,AnaSayfaActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -105,6 +138,7 @@ class MainActivity : AppCompatActivity() {
             val docRef = db.collection("Kullanici").document(PhoneTxt.text.toString())
             docRef.get()
                 .addOnSuccessListener { document ->
+
                     if (document.get("telefon") != null && document.get("parola") != null) {
                         val Telefon = document.get("telefon").toString()
                         val Parola = document.get("parola").toString()
@@ -136,7 +170,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
         }else{
-            toast("Email ve/veya Parola boş bırakılamaz!")
+            toast("Telefon ve/veya Parola boş bırakılamaz!")
         }
 
     }

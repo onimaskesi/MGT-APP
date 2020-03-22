@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_rehber.*
 import kotlinx.android.synthetic.main.contact_child.view.*
@@ -26,6 +27,7 @@ class RehberActivity : AppCompatActivity() {
     private lateinit var db : FirebaseFirestore
     lateinit var Telefon : String
     val userList : MutableList<ContactDTO> = ArrayList()
+    lateinit var docRef : DocumentReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,9 @@ class RehberActivity : AppCompatActivity() {
 
         db = FirebaseFirestore.getInstance()
         Telefon = intent.getStringExtra("tel")
+        docRef = db.collection("Kullanici").document(Telefon)
+
+        makeOfflineTheUser()
 
         contact_list.layoutManager = LinearLayoutManager(this)
 
@@ -72,8 +77,8 @@ class RehberActivity : AppCompatActivity() {
 
         for(contact in contactList){
 
-            val docRef = db.collection("Kullanici").document(contact.number)
-            docRef.get().addOnSuccessListener { document ->
+            val docRefCompare = db.collection("Kullanici").document(contact.number)
+            docRefCompare.get().addOnSuccessListener { document ->
 
                 if (document.get("telefon") != null && document.get("parola") != null){
 
@@ -91,7 +96,35 @@ class RehberActivity : AppCompatActivity() {
 
     }
 
+    fun makeOfflineTheUser(){
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            if(documentSnapshot.get("AktifMi") != false){
+                docRef.update("AktifMi",false)
+            }
+        }
+
+    }
+
+    fun makeOnlineTheUser(){
+
+        docRef.get().addOnSuccessListener { documentSnapshot ->
+            if(documentSnapshot.get("AktifMi") != true){
+                docRef.update("AktifMi",true)
+            }
+        }
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) { //Arka planda olması
+        super.onSaveInstanceState(outState)
+        makeOfflineTheUser()
+    }
+
     fun GeriGit_click(view: View){
+
+        makeOnlineTheUser()
+
         val intent = Intent(applicationContext, AnaSayfaActivity::class.java)
         intent.putExtra("tel",Telefon)
         startActivity(intent)
