@@ -15,12 +15,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 class AnaSayfaActivity : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
+    lateinit var Telefon: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ana_sayfa)
 
         db = FirebaseFirestore.getInstance()
+
+        Telefon = intent.getStringExtra("tel") as String
     }
 
     private fun toast(msg: String){
@@ -30,7 +33,6 @@ class AnaSayfaActivity : AppCompatActivity() {
 
     fun logOut_click(view : View){
         //auth.signOut()
-        val Telefon = intent.getStringExtra("tel") as String
 
         val docRef = db.collection("Kullanici").document(Telefon)
         docRef.update("AktifMi", false)
@@ -54,6 +56,7 @@ class AnaSayfaActivity : AppCompatActivity() {
         }else {
 
             val intent = Intent(applicationContext, RehberActivity::class.java)
+            intent.putExtra("tel",Telefon)
             startActivity(intent)
             finish()
         }

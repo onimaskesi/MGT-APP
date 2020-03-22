@@ -18,11 +18,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_telefon_kayit.*
 import kotlin.text.Typography.tm
 import androidx.core.content.ContextCompat.getSystemService
-
+import android.R.id.edit
+import android.content.SharedPreferences
+import android.telephony.PhoneNumberUtils
+import android.text.Editable
+import android.widget.EditText
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var db : FirebaseFirestore
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +35,21 @@ class MainActivity : AppCompatActivity() {
 
         db = FirebaseFirestore.getInstance()
 
+        if(intent.getStringExtra("tel") != null){
+            val tel = intent.getStringExtra("tel") as String
+
+            PhoneTxt.post(  Runnable(){
+                PhoneTxt.setText(tel)
+            })
+            toast("Bu telefon numarasına kayıtlı bir hesap mevcuttur.")
+
+        }
+
+
+        //kullanıcı daha önce giriş yapmış ise tekrar giriş yapmaksızın  ana sayfaya yönlendirilir
+
+
+        //////////////
 
         //Telefon numaraları görme izni alma ve kullanıcı telefon numarasını çekme bazı ülkelerde telefon numarası fizikselolarak kaydedilmediği için bu işlem işe yaramaz ör. türkiye
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){

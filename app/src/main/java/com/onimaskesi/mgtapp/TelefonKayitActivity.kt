@@ -11,12 +11,14 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_telefon_kayit.*
 import java.util.concurrent.TimeUnit
 
 class TelefonKayitActivity : AppCompatActivity() {
 
     private lateinit var  auth : FirebaseAuth
+    private lateinit var  db : FirebaseFirestore
     lateinit var mCallbaks  : PhoneAuthProvider.OnVerificationStateChangedCallbacks//tel onay
     var verificationId = ""
     var phoneNumber = ""
@@ -26,6 +28,7 @@ class TelefonKayitActivity : AppCompatActivity() {
         setContentView(R.layout.activity_telefon_kayit)
 
         auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         Onayla.visibility = View.INVISIBLE
         Onayla.isClickable = false
@@ -33,11 +36,32 @@ class TelefonKayitActivity : AppCompatActivity() {
         onayText.isClickable = false
         textView6.visibility = View.INVISIBLE
 
+
+
     }
 
+
     fun tamam_click(view : View){
-        OnayView()
-        verify()
+        val docRef = db.collection("Kullanici").document(TelefonTxt.text.toString())
+        docRef.get().addOnSuccessListener {
+            toast("Bu telefon numarasına kayıtlı bir hesap mevcuttur.")
+
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            intent.putExtra("tel",TelefonTxt.text.toString())
+            startActivity(intent)
+            finish()
+
+        }.addOnFailureListener {
+            OnayView()
+            verify()
+        }
+
+    }
+
+    fun GeriGit_click(view: View){
+        val intent = Intent(applicationContext, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private  fun  verify(){

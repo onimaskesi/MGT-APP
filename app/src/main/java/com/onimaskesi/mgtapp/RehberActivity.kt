@@ -2,6 +2,7 @@ package com.onimaskesi.mgtapp
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.contact_child.view.*
 class RehberActivity : AppCompatActivity() {
 
     private lateinit var db : FirebaseFirestore
+    lateinit var Telefon : String
     val userList : MutableList<ContactDTO> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +32,7 @@ class RehberActivity : AppCompatActivity() {
         setContentView(R.layout.activity_rehber)
 
         db = FirebaseFirestore.getInstance()
+        Telefon = intent.getStringExtra("tel")
 
         contact_list.layoutManager = LinearLayoutManager(this)
 
@@ -86,6 +89,13 @@ class RehberActivity : AppCompatActivity() {
 
         contact_list.adapter = ContactAdapter(userList,this)
 
+    }
+
+    fun GeriGit_click(view: View){
+        val intent = Intent(applicationContext, AnaSayfaActivity::class.java)
+        intent.putExtra("tel",Telefon)
+        startActivity(intent)
+        finish()
     }
 
     fun yenile_click(view: View){
