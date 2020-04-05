@@ -161,12 +161,22 @@ class RehberActivity : AppCompatActivity() {
             docRef.get().addOnSuccessListener { document ->
 
                 if(document.get("AktifMi") == true){
+
                     holder.profile.setImageResource(R.drawable.green)
                     holder.button.setBackgroundResource(R.drawable.layout_bg_takipaktif)
+                    holder.button.isClickable = true
+
                 }else{
+
                     holder.profile.setImageResource(R.drawable.red)
                     holder.button.setBackgroundResource(R.drawable.layout_bg_takippasif)
+                    holder.button.isClickable = false
+
                 }
+            }
+
+            holder.button.setOnClickListener {
+                Toast.makeText(this.context,holder.name.text, Toast.LENGTH_LONG).show()
             }
 
         }
@@ -181,6 +191,8 @@ class RehberActivity : AppCompatActivity() {
             val number = v.tv_number!!
             val profile = v.iv_profile!!
             val button = v.TakipEt_btn1!!
+
+
         }
     }
 }

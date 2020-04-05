@@ -72,7 +72,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TelefonKayitActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
+            <state relative-caret-position="-544">
               <caret line="56" column="30" lean-forward="true" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
             </state>
           </provider>
@@ -82,7 +82,12 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="280">
-              <caret line="167" column="88" selection-start-line="167" selection-start-column="88" selection-end-line="167" selection-end-column="88" />
+              <caret line="180" lean-forward="true" selection-start-line="180" selection-end-line="180" />
+              <folding>
+                <element signature="e#3448#3650#0" />
+                <element signature="e#3679#3879#0" />
+                <element signature="e#3936#4037#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -118,7 +123,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/contact_child.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="231">
-              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+              <caret line="52" column="39" lean-forward="true" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
@@ -192,8 +197,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-v24/layout_bg_takipaktif.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_rehber.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-v24/layout_bg_takippasif.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/contact_child.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt" />
       </list>
     </option>
   </component>
@@ -602,13 +607,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TelefonKayitActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="56" column="30" lean-forward="true" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/layout_bg_takippasif.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -619,15 +617,27 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/contact_child.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+          <caret line="52" column="39" lean-forward="true" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TelefonKayitActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-544">
+          <caret line="56" column="30" lean-forward="true" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
-          <caret line="167" column="88" selection-start-line="167" selection-start-column="88" selection-end-line="167" selection-end-column="88" />
+          <caret line="180" lean-forward="true" selection-start-line="180" selection-end-line="180" />
+          <folding>
+            <element signature="e#3448#3650#0" />
+            <element signature="e#3679#3879#0" />
+            <element signature="e#3936#4037#0" />
+          </folding>
         </state>
       </provider>
     </entry>
