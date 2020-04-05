@@ -15,10 +15,12 @@
         app:civ_border_width="2dp" />
 
     <LinearLayout
+        android:id="@+id/name_layout"
         android:layout_toEndOf="@+id/iv_profile"
         android:layout_centerVertical="true"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/TakipEt_btn"
         android:orientation="vertical">
 
         <TextView
@@ -37,4 +39,20 @@
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/TakipEt_btn"
+        android:layout_width="100dp"
+        android:layout_height="31dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/name_layout"
+
+        android:background="@drawable/layout_bg_takipaktif"
+        android:text="Takip Et"
+        android:textColor="#707070"
+        />
 </RelativeLayout>

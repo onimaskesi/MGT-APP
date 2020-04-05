@@ -21,6 +21,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_rehber.*
 import kotlinx.android.synthetic.main.contact_child.view.*
+import kotlinx.android.synthetic.main.contact_child.view.TakipEt_btn as TakipEt_btn1
 
 lateinit var db : FirebaseFirestore
 
@@ -154,6 +155,7 @@ class RehberActivity : AppCompatActivity() {
 
             holder.name.text = list[position].name
             holder.number.text = list[position].number
+            //holder.button.setImageResource(R.drawable.takipaktif)
 
             val docRef = db.collection("Kullanici").document(list[position].number)
             docRef.get().addOnSuccessListener { document ->
@@ -176,6 +178,7 @@ class RehberActivity : AppCompatActivity() {
             val name = v.tv_name!!
             val number = v.tv_number!!
             val profile = v.iv_profile!!
+            val button = v.TakipEt_btn1!!
         }
     }
 }
