@@ -7,47 +7,47 @@
     android:background="#2699FB"
     tools:context=".MainActivity">
 
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="185dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="2dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:text="Parola"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/ParolaTxt"
+        app:layout_constraintEnd_toEndOf="@+id/ParolaTxt"
         app:layout_constraintStart_toStartOf="@+id/ParolaTxt"
         app:layout_constraintTop_toBottomOf="@+id/PhoneTxt" />
 
-
     <EditText
         android:id="@+id/ParolaTxt"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="54dp"
+        android:layout_width="325dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/layout_bg"
         android:ems="10"
         android:inputType="textPassword"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/Girisbtn"
         app:layout_constraintCircleRadius="?attr/dialogCornerRadius"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/PhoneTxt"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/PhoneTxt"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/PhoneTxt"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="43dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="22dp"
+        android:layout_width="325dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/layout_bg"
         android:ems="10"
+        android:hint="Example: 545*******"
         android:inputType="phone"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -59,43 +59,46 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="107dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="185dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="106dp"
+        android:layout_marginBottom="10dp"
         android:text="Telefon"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/PhoneTxt"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/PhoneTxt"
+        app:layout_constraintStart_toStartOf="@+id/PhoneTxt"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/Girisbtn"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/layout_bg"
         android:onClick="girisYap_click"
         android:text="Giriş Yap"
         app:layout_constraintBottom_toTopOf="@+id/KayitOl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ParolaTxt"
+        app:layout_constraintStart_toStartOf="@+id/ParolaTxt"
         app:layout_constraintTop_toBottomOf="@+id/ParolaTxt" />
 
     <Button
         android:id="@+id/KayitOl"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="237dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="215dp"
         android:background="@drawable/layout_bg"
         android:onClick="kayitOl_click"
         android:text="Kayıt ol"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Girisbtn"
+        app:layout_constraintStart_toStartOf="@+id/Girisbtn"
         app:layout_constraintTop_toBottomOf="@+id/Girisbtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

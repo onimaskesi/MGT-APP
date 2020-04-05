@@ -22,9 +22,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_rehber.*
 import kotlinx.android.synthetic.main.contact_child.view.*
 
+lateinit var db : FirebaseFirestore
+
 class RehberActivity : AppCompatActivity() {
 
-    private lateinit var db : FirebaseFirestore
     lateinit var Telefon : String
     val userList : MutableList<ContactDTO> = ArrayList()
     lateinit var docRef : DocumentReference
@@ -64,10 +65,10 @@ class RehberActivity : AppCompatActivity() {
                 obj.name = name
                 obj.number = number
 
-                val photo_uri = contacts.getString(contacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI))
+                /*val photo_uri = contacts.getString(contacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI))
                 if(photo_uri != null){
                     obj.image = MediaStore.Images.Media.getBitmap(contentResolver, Uri.parse(photo_uri))
-                }
+                }*/
 
                 contactList.add(obj)
             }
@@ -85,7 +86,7 @@ class RehberActivity : AppCompatActivity() {
                     val obj = ContactDTO()
                     obj.name = contact.name
                     obj.number = contact.number
-                    obj.image = contact.image
+                    //obj.image = contact.image
 
                     userList.add(obj)
                 }
@@ -150,13 +151,20 @@ class RehberActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ContactAdapter.ViewHolder, position: Int) {
+
             holder.name.text = list[position].name
             holder.number.text = list[position].number
-            if(list[position].image != null){
-                holder.profile.setImageBitmap(list[position].image)
-            }else{
-                holder.profile.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.ic_launcher_round))
+
+            val docRef = db.collection("Kullanici").document(list[position].number)
+            docRef.get().addOnSuccessListener { document ->
+
+                if(document.get("AktifMi") == true){
+                    holder.profile.setImageResource(R.drawable.green)
+                }else{
+                    holder.profile.setImageResource(R.drawable.red)
+                }
             }
+
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactAdapter.ViewHolder {

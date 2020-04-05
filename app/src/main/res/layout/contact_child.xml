@@ -8,11 +8,11 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_profile"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:civ_border_width="2dp"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
         android:padding="4dp"
-        app:civ_border_color="#FF000000"/>
+        app:civ_border_color="#2699FB"
+        app:civ_border_width="2dp" />
 
     <LinearLayout
         android:layout_toEndOf="@+id/iv_profile"
@@ -25,6 +25,7 @@
             android:id="@+id/tv_name"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
+            android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

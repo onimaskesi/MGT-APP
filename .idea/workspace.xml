@@ -72,49 +72,76 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TelefonKayitActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="57" column="28" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
+            <state relative-caret-position="360">
+              <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/ParolaOlusturmaActivity.kt">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="-170">
+              <caret line="40" column="28" lean-forward="true" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
               <folding>
-                <element signature="e#31#425#0" expanded="true" />
+                <element signature="e#3368#3570#0" />
+                <element signature="e#3599#3799#0" />
+                <element signature="e#3856#3957#0" />
+                <element signature="e#3992#4193#0" />
+                <element signature="e#4332#4398#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/AnaSayfaActivity.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="65" column="28" lean-forward="true" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
             </state>
           </provider>
+          <provider selected="true" editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="150" selection-start-line="150" selection-end-line="150" />
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_telefon_kayit.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="105" column="38" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="38" />
             </state>
           </provider>
+          <provider selected="true" editor-type-id="android-designer2" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/MainActivity.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="39" column="60" lean-forward="true" selection-start-line="39" selection-start-column="60" selection-end-line="39" selection-end-column="60" />
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_parola_olusturma.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
             </state>
           </provider>
+          <provider selected="true" editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/contact_child.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="29" column="50" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_rehber.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
     </leaf>
@@ -148,7 +175,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/kayitActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_sms_onayi.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/SmsOnayiActivity.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_parola_olusturma.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/contact_data.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/Contact.kt" />
@@ -162,18 +188,19 @@
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/ContactDTO.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_rehber.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_telefon_kayit.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/MainActivity.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/contact_child.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TelefonKayitActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/AnaSayfaActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/ParolaOlusturmaActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/MainActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/contact_child.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_parola_olusturma.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_telefon_kayit.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-7" />
     <option name="width" value="999" />
     <option name="height" value="735" />
@@ -184,31 +211,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="MGT APP" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="MGT APP" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="MGT APP" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="mgtapp" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -229,19 +235,19 @@
     <option name="LAST_EDITED_SIGNING_CONFIG" value="debug" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Kral\Desktop\Bitirme proj\MGT APP\app\src\main\res\drawable-v24" />
-      <recent name="C:\Users\Kral\Desktop\Bitirme proj\MGT APP\app\src\main\res\drawable" />
-      <recent name="C:\Users\Kral\Desktop\Bitirme proj\MGT APP\app" />
-    </key>
-    <key name="android.template.packageName">
-      <recent name="com.onimaskesi.mgtapp" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Kral\Desktop\Bitirme proj\MGT APP\app\src\main\res\drawable" />
       <recent name="C:\Users\Kral\Desktop\Bitirme proj\MGT APP\app\src\main\java\com\onimaskesi\mgtapp" />
       <recent name="C:\Users\Kral\Desktop\Bitirme proj\MGT APP\app\src\main\res\layout" />
       <recent name="C:\Users\Kral\Desktop\Bitirme proj\MGT APP\app\src\main\res\drawable-v24" />
+    </key>
+    <key name="android.template.packageName">
+      <recent name="com.onimaskesi.mgtapp" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Kral\Desktop\Bitirme proj\MGT APP\app\src\main\res\drawable-v24" />
+      <recent name="C:\Users\Kral\Desktop\Bitirme proj\MGT APP\app\src\main\res\drawable" />
+      <recent name="C:\Users\Kral\Desktop\Bitirme proj\MGT APP\app" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -376,9 +382,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.MGT APP [signingReport]" />
         <item itemvalue="Gradle.MGT APP:app [build]" />
         <item itemvalue="Gradle.MGT APP [build]" />
-        <item itemvalue="Gradle.MGT APP [signingReport]" />
       </list>
     </recent_temporary>
   </component>
@@ -417,23 +423,23 @@
       <window_info id="Designer" order="6" />
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
-      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.49621785" weight="0.3289689" />
+      <window_info anchor="bottom" id="Run" order="0" sideWeight="0.49621785" visible="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.4977307" weight="0.3289689" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.3289689" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.33387887" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.3289689" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50378215" side_tool="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49621785" visible="true" weight="0.32405892" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49621785" weight="0.32405892" />
       <window_info anchor="bottom" id="Find" order="8" weight="0.3289689" />
       <window_info anchor="bottom" id="Android Profiler" order="9" />
-      <window_info anchor="right" id="Hierarchy" weight="0.32980332" />
       <window_info anchor="right" id="Device File Explorer" order="0" sideWeight="0.502439" side_tool="true" weight="0.32980332" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" sideWeight="0.49756098" weight="0.32980332" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Preview" order="4" weight="0.3290469" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
+      <window_info anchor="right" id="Hierarchy" order="6" weight="0.32980332" />
     </layout>
   </component>
   <component name="editorHistoryManager">
@@ -486,52 +492,28 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/close.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_parola_olusturma.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="70" selection-start-line="7" selection-start-column="70" selection-end-line="7" selection-end-column="70" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/Contact.kt" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/contact_data.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/ListAdapter.kt" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_ana_sayfa.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="16" column="38" lean-forward="true" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/img.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/circle.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/img.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_rehber.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="17" selection-start-line="29" selection-start-column="4" selection-end-line="38" selection-end-column="44" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_telefon_kayit.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="103" column="38" selection-start-line="103" selection-start-column="25" selection-end-line="103" selection-end-column="38" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/app/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128078">
@@ -560,57 +542,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/contact_child.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-142">
-          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TelefonKayitActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="57" column="28" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="150" selection-start-line="150" selection-end-line="150" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/AnaSayfaActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="65" column="28" lean-forward="true" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/ParolaOlusturmaActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="408">
+          <caret line="53" column="49" lean-forward="true" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
           <folding>
             <element signature="e#31#425#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/AnaSayfaActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="40" column="27" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/MainActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="39" column="60" lean-forward="true" selection-start-line="39" selection-start-column="60" selection-end-line="39" selection-end-column="60" />
+        <state relative-caret-position="102">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_rehber.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/contact_child.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="29" column="50" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_parola_olusturma.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_telefon_kayit.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="105" column="38" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TelefonKayitActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-170">
+          <caret line="40" column="28" lean-forward="true" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
+          <folding>
+            <element signature="e#3368#3570#0" />
+            <element signature="e#3599#3799#0" />
+            <element signature="e#3856#3957#0" />
+            <element signature="e#3992#4193#0" />
+            <element signature="e#4332#4398#0" />
+          </folding>
         </state>
       </provider>
     </entry>
