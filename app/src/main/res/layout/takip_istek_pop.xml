@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/layout_bg_takip_pop">
+
+    <TextView
+        android:id="@+id/TakipIstekTv"
+        android:layout_gravity="center"
+        android:layout_width="308dp"
+        android:layout_height="149dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:text="  onimaskesi \n Sizi Takip Etmek İstiyor"
+        android:background="@drawable/layout_bg_curve_radius"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="50dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/RedBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/layout_bg_red"
+            android:text="Red"
+            android:textColor="#FFFFFF"
+            tools:layout_editor_absoluteX="68dp"
+            tools:layout_editor_absoluteY="250dp" />
+
+        <Button
+            android:id="@+id/KabulBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/layout_bg_kabul"
+            android:text="Kabul"
+            android:textColor="#FFFFFF"
+            tools:layout_editor_absoluteX="265dp"
+            tools:layout_editor_absoluteY="250dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
+

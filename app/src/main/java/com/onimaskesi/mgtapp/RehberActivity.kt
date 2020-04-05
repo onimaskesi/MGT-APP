@@ -176,7 +176,17 @@ class RehberActivity : AppCompatActivity() {
             }
 
             holder.button.setOnClickListener {
-                Toast.makeText(this.context,holder.name.text, Toast.LENGTH_LONG).show()
+
+                //Toast.makeText(this.context,holder.number.text, Toast.LENGTH_LONG).show()
+
+                docRef.get().addOnSuccessListener { documentSnapshot ->
+
+                    if(documentSnapshot.get("IstekVarMi") != true){
+
+                        docRef.update("IstekVarMi",true)
+                    }
+                }
+
             }
 
         }

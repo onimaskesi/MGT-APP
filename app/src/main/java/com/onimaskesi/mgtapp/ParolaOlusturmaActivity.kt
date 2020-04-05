@@ -40,7 +40,8 @@ class ParolaOlusturmaActivity : AppCompatActivity() {
             val data1 = hashMapOf(
                 "telefon" to phoneNumber,
                 "parola" to parola,
-                "AktifMi" to false
+                "AktifMi" to false,
+                "IstekVarMi" to false
             )
             kullanici.document(phoneNumber).set(data1).addOnCompleteListener { task ->
 
