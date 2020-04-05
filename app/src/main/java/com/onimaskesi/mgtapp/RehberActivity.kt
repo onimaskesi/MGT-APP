@@ -162,8 +162,10 @@ class RehberActivity : AppCompatActivity() {
 
                 if(document.get("AktifMi") == true){
                     holder.profile.setImageResource(R.drawable.green)
+                    holder.button.setBackgroundResource(R.drawable.layout_bg_takipaktif)
                 }else{
                     holder.profile.setImageResource(R.drawable.red)
+                    holder.button.setBackgroundResource(R.drawable.layout_bg_takippasif)
                 }
             }
 
