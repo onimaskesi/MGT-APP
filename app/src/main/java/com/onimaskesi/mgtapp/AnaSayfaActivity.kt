@@ -25,6 +25,7 @@ class AnaSayfaActivity : AppCompatActivity() {
     lateinit var sharedPref: SharedPreferences
     lateinit var docRef : DocumentReference
     lateinit var registration : ListenerRegistration
+    val userList : MutableList<ContactDTO> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +40,12 @@ class AnaSayfaActivity : AppCompatActivity() {
 
         makeOnlineTheUser()
 
+        CreateUserList()
+
         registration = docRef.addSnapshotListener { snapshot, e ->
 
             if (e != null) {
-                toast("Listen failed.")
+                toast("Takip isteği dinleme hatası!")
             }
 
             if (snapshot != null && snapshot.exists()) {
@@ -54,20 +57,62 @@ class AnaSayfaActivity : AppCompatActivity() {
                 }
 
             } else {
-                toast( "Current data: null")
+                toast( "İstek durumu null !")
             }
         }
+
+    }
+
+    fun CreateUserList(){
+        val userSize = sharedPref.getInt("userSize",0)
+
+
+        for (i in 0..userSize){
+            val obj = ContactDTO()
+            obj.name = sharedPref.getString("user${i} name","onimaskesi") as String
+            obj.number = sharedPref.getString("user${i} tel","onimaskesi") as String
+
+            userList.add(obj)
+        }
+
 
     }
 
 
     fun TakipIstegiPop(){
 
+        var istekGonderenTel = ""
         val takipIstekView = LayoutInflater.from(this.applicationContext).inflate(R.layout.takip_istek_pop,null)
+        var istekAtanRehberdeVarMi = false
 
-        val mBuilder = AlertDialog.Builder(this).setView(takipIstekView)
+        docRef.get().addOnSuccessListener {document ->
 
-        val mAlertDialog = mBuilder.show()
+            if(document.get("IstekGonderenTel") != null){
+
+                istekGonderenTel = document.get("IstekGonderenTel") as String
+
+                for (userInRehber in userList){
+
+                    if(userInRehber.number == istekGonderenTel){
+
+                        istekAtanRehberdeVarMi = true
+                        takipIstekView.TakipIstekTv.setText("${userInRehber.name} \n Sizi Takip Etmek İstiyor")
+
+                    }
+                }
+                if(istekAtanRehberdeVarMi == false){
+                    takipIstekView.TakipIstekTv.setText("${istekGonderenTel} \n Sizi Takip Etmek İstiyor")
+                }
+
+            }
+
+        }
+
+
+
+        val alertBuilder = AlertDialog.Builder(this).setView(takipIstekView)
+
+        val mAlertDialog = alertBuilder.show()
 
         takipIstekView.RedBtn.setOnClickListener {
             mAlertDialog.dismiss()

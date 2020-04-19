@@ -3,6 +3,7 @@ package com.onimaskesi.mgtapp
 import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -24,10 +25,12 @@ import kotlinx.android.synthetic.main.contact_child.view.*
 import kotlinx.android.synthetic.main.contact_child.view.TakipEt_btn as TakipEt_btn1
 
 lateinit var db : FirebaseFirestore
+lateinit var Telefon : String
+lateinit var sharedPref: SharedPreferences
 
 class RehberActivity : AppCompatActivity() {
 
-    lateinit var Telefon : String
+
     val userList : MutableList<ContactDTO> = ArrayList()
     lateinit var docRef : DocumentReference
 
@@ -38,6 +41,7 @@ class RehberActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
         Telefon = intent.getStringExtra("tel")
         docRef = db.collection("Kullanici").document(Telefon)
+        sharedPref = getSharedPreferences("mgt-shared",0)
 
         makeOfflineTheUser()
 
@@ -77,6 +81,8 @@ class RehberActivity : AppCompatActivity() {
         }
         contacts.close()
 
+        var userSize = 0
+
         for(contact in contactList){
 
             val docRefCompare = db.collection("Kullanici").document(contact.number)
@@ -89,12 +95,21 @@ class RehberActivity : AppCompatActivity() {
                     obj.number = contact.number
                     //obj.image = contact.image
 
+                    if(sharedPref.getString("user${userSize} name",null) == null ){
+                        sharedPref.edit().putString("user${userSize} name",contact.name).apply()
+                        sharedPref.edit().putString("user${userSize} tel",contact.number).apply()
+                    }
+
+                    userSize++
+                    sharedPref.edit().putInt("userSize",userSize).apply()
+
                     userList.add(obj)
                 }
             }
         }
 
         contact_list.adapter = ContactAdapter(userList,this)
+
 
     }
 
@@ -183,7 +198,11 @@ class RehberActivity : AppCompatActivity() {
 
                     if(documentSnapshot.get("IstekVarMi") != true){
 
+                        docRef.update("IstekGonderenTel",Telefon)
                         docRef.update("IstekVarMi",true)
+
+                    }else{
+                        Toast.makeText(this.context,"hali hazırda istek var!",Toast.LENGTH_LONG).show()
                     }
                 }
 
