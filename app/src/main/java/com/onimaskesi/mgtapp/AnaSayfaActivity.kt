@@ -118,11 +118,37 @@ class AnaSayfaActivity : AppCompatActivity() {
             mAlertDialog.dismiss()
             docRef.update("IstekVarMi",false)
         }
+
         takipIstekView.KabulBtn.setOnClickListener {
-            //kabul butonuna basılınca yapılacaklar: listeye almaya başlar(activity ile) ve start butonuna basması halinde takip başlar [t.eden edilen kim kimdir vs.. database ile iletişim halinde ilerler]
-            mAlertDialog.dismiss()
-            toast("İyi yolculuklar xD")
+
             docRef.update("IstekVarMi",false)
+            registration.remove()
+
+            val takipci_values = hashMapOf(
+
+                "Telefon" to istekGonderenTel
+
+            )
+
+            val takipciler = docRef.collection("Takipciler")
+
+
+            takipciler.document(istekGonderenTel).set(takipci_values).addOnSuccessListener {
+
+                val intent = Intent(applicationContext, TakipEdeceklerListesi::class.java )
+                intent.putExtra("tel",Telefon)
+                intent.putExtra("takipci",istekGonderenTel)
+                startActivity(intent)
+                finish()
+
+            }.addOnFailureListener { exception ->
+
+                toast(exception.localizedMessage.toString())
+
+            }
+
+            mAlertDialog.dismiss()
+
         }
 
     }
@@ -174,6 +200,10 @@ class AnaSayfaActivity : AppCompatActivity() {
         var intent = Intent(applicationContext,MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    fun Kayitli_rotalar_click(view: View){
+
     }
 
     fun Rehber_click(view: View){

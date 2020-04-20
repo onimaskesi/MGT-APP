@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RehberActivity"></activity>
+        <activity android:name=".TakipEdeceklerListesi"></activity>
+        <activity android:name=".RehberActivity" />
         <activity android:name=".AnaSayfaActivity" />
         <activity android:name=".ParolaOlusturmaActivity" />
         <activity android:name=".TelefonKayitActivity" />
