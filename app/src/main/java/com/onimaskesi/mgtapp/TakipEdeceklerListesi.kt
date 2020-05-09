@@ -10,11 +10,14 @@ import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.ListView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.android.synthetic.main.activity_takip_edecekler_listesi.*
+import kotlinx.android.synthetic.main.takip_istek_pop.view.*
 import kotlinx.android.synthetic.main.takipciler.view.*
 
 class TakipEdeceklerListesi : AppCompatActivity() {
@@ -24,6 +27,7 @@ class TakipEdeceklerListesi : AppCompatActivity() {
     var Takipci_list : MutableList<ContactDTO> = ArrayList()
     lateinit var docRef : DocumentReference
     val userList : MutableList<ContactDTO> = ArrayList()
+    lateinit var registration : ListenerRegistration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +45,31 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
         CreateUserList()
 
+        listeye_takipci_ekle(ilk_takipci_tel)
+
+        registration = docRef.addSnapshotListener { snapshot, e ->
+
+            if (e != null) {
+                toast("Takip isteği dinleme hatası!")
+            }
+
+            if (snapshot != null && snapshot.exists()) {
+
+                if(snapshot.get("IstekVarMi") == true){
+
+                    TakipIstegiPop()
+
+                }
+
+            } else {
+                toast( "İstek durumu null !")
+            }
+        }
+
+    }
+
+    fun listeye_takipci_ekle(ilk_takipci_tel : String){
+
         var takipci = ContactDTO()
         takipci.number = ilk_takipci_tel
         if( numara_rehberde_mi( ilk_takipci_tel ) != "NO" ){
@@ -56,6 +85,64 @@ class TakipEdeceklerListesi : AppCompatActivity() {
         takipciler_list.layoutManager = LinearLayoutManager(this)
 
         takipciler_list.adapter = TakipciAdapter(Takipci_list, this)
+    }
+
+    fun TakipIstegiPop(){
+
+        var istekGonderenTel = ""
+        val takipIstekView = LayoutInflater.from(this.applicationContext).inflate(R.layout.takip_istek_pop,null)
+        var ilk_takipci = ""
+
+        docRef.get().addOnSuccessListener {document ->
+
+            if(document.get("IstekGonderenTel") != null){
+
+                istekGonderenTel = document.get("IstekGonderenTel") as String
+
+                ilk_takipci = numara_rehberde_mi(istekGonderenTel)
+                takipIstekView.TakipIstekTv.setText("${ilk_takipci} \n Sizi Takip Etmek İstiyor")
+
+            }
+
+        }
+
+
+
+        val alertBuilder = AlertDialog.Builder(this).setView(takipIstekView)
+
+        val mAlertDialog = alertBuilder.show()
+
+        takipIstekView.RedBtn.setOnClickListener {
+            mAlertDialog.dismiss()
+            docRef.update("IstekVarMi",false)
+        }
+
+        takipIstekView.KabulBtn.setOnClickListener {
+
+            docRef.update("IstekVarMi",false)
+            registration.remove()
+
+            val takipci_values = hashMapOf(
+
+                "Telefon" to istekGonderenTel
+
+            )
+
+            val takipciler = docRef.collection("Takipciler")
+
+            takipciler.document(istekGonderenTel).set(takipci_values).addOnSuccessListener {
+
+            }.addOnFailureListener { exception ->
+
+                toast(exception.localizedMessage.toString())
+
+            }
+
+            mAlertDialog.dismiss()
+
+            listeye_takipci_ekle(istekGonderenTel)
+
+        }
 
     }
 
@@ -89,6 +176,8 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
     fun iptal_click(view: View){
 
+        registration.remove()
+
         for(takipci in Takipci_list){
             docRef.collection("Takipciler").document(takipci.number).delete().addOnFailureListener { exception ->
                 toast(exception.localizedMessage.toString())
@@ -103,7 +192,7 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
     fun baslat_click(view: View){
 
-
+        registration.remove()
 
     }
 
