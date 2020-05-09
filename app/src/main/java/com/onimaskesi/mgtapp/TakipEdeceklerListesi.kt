@@ -1,14 +1,18 @@
 package com.onimaskesi.mgtapp
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
+import android.widget.ListView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_takip_edecekler_listesi.*
 import kotlinx.android.synthetic.main.takipciler.view.*
@@ -17,24 +21,93 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
     private lateinit var db : FirebaseFirestore
     lateinit var Telefon : String
+    var Takipci_list : MutableList<ContactDTO> = ArrayList()
+    lateinit var docRef : DocumentReference
+    val userList : MutableList<ContactDTO> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_takip_edecekler_listesi)
 
+
+        db = FirebaseFirestore.getInstance()
         Telefon = intent.getStringExtra("tel")
-        //Takipci_list.add(intent.getStringExtra("takipci"))
+        docRef = db.collection("Kullanici").document(Telefon)
 
-        //takipciyi takipciler listesine ekle
+        sharedPref = getSharedPreferences("mgt-shared",0)
 
-        //takipciler_list.layoutManager = LinearLayoutManager(this)
 
-        //takipciler_list.adapter = Adapter(Takipci_list, this)
+        val ilk_takipci_tel = intent.getStringExtra("takipci")
+
+        CreateUserList()
+
+        var takipci = ContactDTO()
+        takipci.number = ilk_takipci_tel
+        if( numara_rehberde_mi( ilk_takipci_tel ) != "NO" ){
+
+            takipci.name = numara_rehberde_mi( ilk_takipci_tel )
+
+        }else{
+            takipci.name = null.toString()
+        }
+
+        Takipci_list.add(takipci)
+
+        takipciler_list.layoutManager = LinearLayoutManager(this)
+
+        takipciler_list.adapter = TakipciAdapter(Takipci_list, this)
+
+    }
+
+    fun CreateUserList(){
+        val userSize = sharedPref.getInt("userSize",0)
+
+        for (i in 0..userSize){
+            val obj = ContactDTO()
+            obj.name = sharedPref.getString("user${i} name","onimaskesi") as String
+            obj.number = sharedPref.getString("user${i} tel","onimaskesi") as String
+
+            userList.add(obj)
+        }
+
+    }
+
+    fun numara_rehberde_mi(istekGonderenTel : String): String {
+
+        for (userInRehber in userList){
+
+            if(userInRehber.number == istekGonderenTel){
+                return userInRehber.name
+            }
+        }
+        return "NO"
+    }
+
+    private fun toast(msg: String){
+        Toast.makeText(this,msg, Toast.LENGTH_LONG).show()
+    }
+
+    fun iptal_click(view: View){
+
+        for(takipci in Takipci_list){
+            docRef.collection("Takipciler").document(takipci.number).delete().addOnFailureListener { exception ->
+                toast(exception.localizedMessage.toString())
+            }
+        }
+
+        val intent = Intent(applicationContext, AnaSayfaActivity::class.java)
+        intent.putExtra("tel",Telefon)
+        startActivity(intent)
+        finish()
+    }
+
+    fun baslat_click(view: View){
+
 
 
     }
 
-    class Adapter(items : List<String>,ctx: Context) : RecyclerView.Adapter<Adapter.ViewHolder>(){
+    class TakipciAdapter(items : List<ContactDTO>,ctx: Context) : RecyclerView.Adapter<TakipciAdapter.ViewHolder>(){
 
         private var list = items
         private var context = ctx
@@ -43,19 +116,28 @@ class TakipEdeceklerListesi : AppCompatActivity() {
             return list.size
         }
 
-        override fun onBindViewHolder(holder: Adapter.ViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: TakipciAdapter.ViewHolder, position: Int) {
 
-            holder.name.text = list[position]
+            if(list[position].name != null.toString()){
+
+                holder.name.text = list[position].name
+
+            }else{
+                holder.name.text = list[position].number
+            }
+
+            //holder.button.setImageResource(R.drawable.takipaktif)
 
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Adapter.ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TakipciAdapter.ViewHolder {
             return ViewHolder(LayoutInflater.from(context).inflate(R.layout.takipciler,parent,false))
         }
 
-
         class ViewHolder(v: View) : RecyclerView.ViewHolder(v){
+
             val name = v.takipci_name
+
         }
     }
 }

@@ -7,7 +7,4 @@ class ContactDTO {
     var number = ""
     //var image : Bitmap? = null
     //var IsActive = false
-    var takipBtnActive: Boolean
-        get() = false
-        set(value) = TODO()
 }

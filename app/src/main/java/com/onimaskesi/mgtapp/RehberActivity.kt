@@ -110,7 +110,6 @@ class RehberActivity : AppCompatActivity() {
 
         contact_list.adapter = ContactAdapter(userList,this)
 
-
     }
 
     fun makeOfflineTheUser(){

@@ -78,12 +78,22 @@ class AnaSayfaActivity : AppCompatActivity() {
 
     }
 
+    fun numara_rehberde_mi(istekGonderenTel : String): String {
+
+        for (userInRehber in userList){
+
+            if(userInRehber.number == istekGonderenTel){
+                return userInRehber.name
+            }
+        }
+        return istekGonderenTel
+    }
 
     fun TakipIstegiPop(){
 
         var istekGonderenTel = ""
         val takipIstekView = LayoutInflater.from(this.applicationContext).inflate(R.layout.takip_istek_pop,null)
-        var istekAtanRehberdeVarMi = false
+        var ilk_takipci = ""
 
         docRef.get().addOnSuccessListener {document ->
 
@@ -91,18 +101,8 @@ class AnaSayfaActivity : AppCompatActivity() {
 
                 istekGonderenTel = document.get("IstekGonderenTel") as String
 
-                for (userInRehber in userList){
-
-                    if(userInRehber.number == istekGonderenTel){
-
-                        istekAtanRehberdeVarMi = true
-                        takipIstekView.TakipIstekTv.setText("${userInRehber.name} \n Sizi Takip Etmek İstiyor")
-
-                    }
-                }
-                if(istekAtanRehberdeVarMi == false){
-                    takipIstekView.TakipIstekTv.setText("${istekGonderenTel} \n Sizi Takip Etmek İstiyor")
-                }
+                ilk_takipci = numara_rehberde_mi(istekGonderenTel)
+                takipIstekView.TakipIstekTv.setText("${ilk_takipci} \n Sizi Takip Etmek İstiyor")
 
             }
 
@@ -132,14 +132,7 @@ class AnaSayfaActivity : AppCompatActivity() {
 
             val takipciler = docRef.collection("Takipciler")
 
-
             takipciler.document(istekGonderenTel).set(takipci_values).addOnSuccessListener {
-
-                val intent = Intent(applicationContext, TakipEdeceklerListesi::class.java )
-                intent.putExtra("tel",Telefon)
-                intent.putExtra("takipci",istekGonderenTel)
-                startActivity(intent)
-                finish()
 
             }.addOnFailureListener { exception ->
 
@@ -148,6 +141,12 @@ class AnaSayfaActivity : AppCompatActivity() {
             }
 
             mAlertDialog.dismiss()
+
+            val intent = Intent(applicationContext, TakipEdeceklerListesi::class.java )
+            intent.putExtra("tel",Telefon)
+            intent.putExtra("takipci",istekGonderenTel)
+            startActivity(intent)
+            finish()
 
         }
 
@@ -188,7 +187,6 @@ class AnaSayfaActivity : AppCompatActivity() {
     private fun toast(msg: String){
         Toast.makeText(this,msg, Toast.LENGTH_LONG).show()
     }
-
 
     fun logOut_click(view : View){
         //auth.signOut()
