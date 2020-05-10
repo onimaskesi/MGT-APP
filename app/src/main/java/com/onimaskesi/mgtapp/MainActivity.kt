@@ -76,46 +76,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    /*
-    override fun onStart() {
-        super.onStart()
-        toast("onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        toast( "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        toast( "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        toast( "onStop")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        toast( "onRestart")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        toast( "onDestroy")
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) { //Arka planda olması
-        super.onSaveInstanceState(outState)
-        toast( "onSaveInstanceState")
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-        toast( "onRestoreInstanceState")
-    }*/
 
 
     private fun toast(msg: String){

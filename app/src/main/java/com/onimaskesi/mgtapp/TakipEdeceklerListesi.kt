@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.common.util.ArrayUtils.removeAll
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -26,13 +27,12 @@ class TakipEdeceklerListesi : AppCompatActivity() {
     lateinit var Telefon : String
     var Takipci_list : MutableList<ContactDTO> = ArrayList()
     lateinit var docRef : DocumentReference
-    val userList : MutableList<ContactDTO> = ArrayList()
+    val userList : MutableList<ContactDTO> = mutableListOf()
     lateinit var registration : ListenerRegistration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_takip_edecekler_listesi)
-
 
         db = FirebaseFirestore.getInstance()
         Telefon = intent.getStringExtra("tel")
@@ -44,6 +44,7 @@ class TakipEdeceklerListesi : AppCompatActivity() {
         val ilk_takipci_tel = intent.getStringExtra("takipci")
 
         CreateUserList()
+
 
         listeye_takipci_ekle(ilk_takipci_tel)
 
@@ -57,7 +58,15 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
                 if(snapshot.get("IstekVarMi") == true){
 
-                    TakipIstegiPop()
+                    for(takipciler in Takipci_list){
+
+                        if(takipciler.number != snapshot.get("IstekGonderenTel")){
+
+                            TakipIstegiPop()
+
+                        }
+
+                    }
 
                 }
 
@@ -72,6 +81,8 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
         var takipci = ContactDTO()
         takipci.number = ilk_takipci_tel
+
+
         if( numara_rehberde_mi( ilk_takipci_tel ) != "NO" ){
 
             takipci.name = numara_rehberde_mi( ilk_takipci_tel )
@@ -85,6 +96,8 @@ class TakipEdeceklerListesi : AppCompatActivity() {
         takipciler_list.layoutManager = LinearLayoutManager(this)
 
         takipciler_list.adapter = TakipciAdapter(Takipci_list, this)
+
+
     }
 
     fun TakipIstegiPop(){
@@ -177,8 +190,10 @@ class TakipEdeceklerListesi : AppCompatActivity() {
     fun iptal_click(view: View){
 
         registration.remove()
+        Takipci_list.clear()
 
         for(takipci in Takipci_list){
+
             docRef.collection("Takipciler").document(takipci.number).delete().addOnFailureListener { exception ->
                 toast(exception.localizedMessage.toString())
             }

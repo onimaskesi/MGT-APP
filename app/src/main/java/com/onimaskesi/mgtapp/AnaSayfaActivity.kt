@@ -127,7 +127,8 @@ class AnaSayfaActivity : AppCompatActivity() {
             val takipci_values = hashMapOf(
 
                 "Telefon" to istekGonderenTel
-
+                //"X" to 12.3
+                //"Y" to 123214.55
             )
 
             val takipciler = docRef.collection("Takipciler")
@@ -173,7 +174,9 @@ class AnaSayfaActivity : AppCompatActivity() {
 
         docRef.get().addOnSuccessListener { documentSnapshot ->
             if(documentSnapshot.get("AktifMi") != true){
+
                 docRef.update("AktifMi",true)
+
             }
         }
 
