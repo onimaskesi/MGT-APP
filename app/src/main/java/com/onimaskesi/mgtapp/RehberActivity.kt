@@ -20,9 +20,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.android.synthetic.main.activity_rehber.*
+import kotlinx.android.synthetic.main.activity_rehber.view.*
 import kotlinx.android.synthetic.main.contact_child.view.*
-import kotlinx.android.synthetic.main.contact_child.view.TakipEt_btn as TakipEt_btn1
 
 lateinit var db : FirebaseFirestore
 lateinit var Telefon : String
@@ -33,6 +34,7 @@ class RehberActivity : AppCompatActivity() {
 
     val userList : MutableList<ContactDTO> = ArrayList()
     lateinit var docRef : DocumentReference
+    lateinit var registration : ListenerRegistration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,6 +112,31 @@ class RehberActivity : AppCompatActivity() {
 
         contact_list.adapter = ContactAdapter(userList,this)
 
+        registration = docRef.addSnapshotListener { snapshot, e ->
+
+            if (e != null) {
+                toast(e.toString())
+            }
+
+            if (snapshot != null && snapshot.exists()) {
+
+                if(snapshot.get("AtilanIstekKabulEdildiMi").toString() == "1"){
+
+                    //go list activity as a takipci
+
+                }else if(snapshot.get("AtilanIstekKabulEdildiMi").toString() == "0"){
+
+                    toast("Istek Reddedildi!")
+                    val intent = Intent(applicationContext, AnaSayfaActivity::class.java)
+                    intent.putExtra("tel",Telefon)
+                    startActivity(intent)
+                    registration.remove()
+                    finish()
+                }
+                //intent değişimlerine registration.remove() ekle
+            }
+        }
+
     }
 
     fun makeOfflineTheUser(){
@@ -140,6 +167,7 @@ class RehberActivity : AppCompatActivity() {
     fun GeriGit_click(view: View){
 
         makeOnlineTheUser()
+        registration.remove()
 
         val intent = Intent(applicationContext, AnaSayfaActivity::class.java)
         intent.putExtra("tel",Telefon)
@@ -152,7 +180,7 @@ class RehberActivity : AppCompatActivity() {
     }
 
 
-    private fun toast(msg: String){
+    fun toast(msg: String){
         Toast.makeText(this,msg, Toast.LENGTH_LONG).show()
     }
 
@@ -165,11 +193,13 @@ class RehberActivity : AppCompatActivity() {
             return list.size
         }
 
+
         override fun onBindViewHolder(holder: ContactAdapter.ViewHolder, position: Int) {
 
             holder.name.text = list[position].name
             holder.number.text = list[position].number
             //holder.button.setImageResource(R.drawable.takipaktif)
+
 
             val docRef = db.collection("Kullanici").document(list[position].number)
             docRef.get().addOnSuccessListener { document ->
@@ -200,12 +230,20 @@ class RehberActivity : AppCompatActivity() {
                         docRef.update("IstekGonderenTel",Telefon)
                         docRef.update("IstekVarMi",true)
 
+                        holder.button.setBackgroundResource(R.drawable.layout_bg_takipbekleniyor)
+                        holder.button.text = "Bekleniyor..."
+
+
+
                     }else{
                         Toast.makeText(this.context,"hali hazırda istek var!",Toast.LENGTH_LONG).show()
                     }
+
                 }
 
+
             }
+
 
         }
 
@@ -218,9 +256,7 @@ class RehberActivity : AppCompatActivity() {
             val name = v.tv_name!!
             val number = v.tv_number!!
             val profile = v.iv_profile!!
-            val button = v.TakipEt_btn1!!
-
-
+            val button = v.TakipEt_btn!!
         }
     }
 }

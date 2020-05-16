@@ -127,12 +127,16 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
         takipIstekView.RedBtn.setOnClickListener {
             mAlertDialog.dismiss()
+            db.collection("Kullanici").document(istekGonderenTel).update("AtilanIstekKabulEdildiMi",0)
+
             docRef.update("IstekVarMi",false)
         }
 
         takipIstekView.KabulBtn.setOnClickListener {
 
             docRef.update("IstekVarMi",false)
+            db.collection("Kullanici").document(istekGonderenTel).update("AtilanIstekKabulEdildiMi",1)
+
             registration.remove()
 
             val takipci_values = hashMapOf(

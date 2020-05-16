@@ -42,6 +42,8 @@ class AnaSayfaActivity : AppCompatActivity() {
 
         CreateUserList()
 
+        db.collection("Kullanici").document(Telefon).update("AtilanIstekKabulEdildiMi",2)// 0 => red, 1 => kabul, 2 => beklemede
+
         registration = docRef.addSnapshotListener { snapshot, e ->
 
             if (e != null) {
@@ -62,6 +64,7 @@ class AnaSayfaActivity : AppCompatActivity() {
         }
 
     }
+
 
     fun CreateUserList(){
         val userSize = sharedPref.getInt("userSize",0)
@@ -116,12 +119,15 @@ class AnaSayfaActivity : AppCompatActivity() {
 
         takipIstekView.RedBtn.setOnClickListener {
             mAlertDialog.dismiss()
+            db.collection("Kullanici").document(istekGonderenTel).update("AtilanIstekKabulEdildiMi",0)
+
             docRef.update("IstekVarMi",false)
         }
 
         takipIstekView.KabulBtn.setOnClickListener {
 
             docRef.update("IstekVarMi",false)
+            db.collection("Kullanici").document(istekGonderenTel).update("AtilanIstekKabulEdildiMi",1)
             registration.remove()
 
             val takipci_values = hashMapOf(

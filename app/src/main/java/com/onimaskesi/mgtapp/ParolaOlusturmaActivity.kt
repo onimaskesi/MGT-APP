@@ -41,12 +41,13 @@ class ParolaOlusturmaActivity : AppCompatActivity() {
                 "telefon" to phoneNumber,
                 "parola" to parola,
                 "AktifMi" to false,
-                "IstekVarMi" to false,
-                "IstekGonderenTel" to null as String
+                "IstekVarMi" to false //,
+                //"IstekGonderenTel" to null as String
             )
             kullanici.document(phoneNumber).set(data1).addOnCompleteListener { task ->
 
                 if(task.isSuccessful){
+                    kullanici.document(phoneNumber).update("IstekGonderenTel","null")
                     val intent = Intent(applicationContext, MainActivity::class.java)
                     intent.putExtra("tel",phoneNumber)
                     startActivity(intent)

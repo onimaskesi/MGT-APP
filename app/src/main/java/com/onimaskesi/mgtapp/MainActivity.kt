@@ -38,10 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         if(intent.getStringExtra("tel") != null){
             val tel = intent.getStringExtra("tel") as String
-
-            PhoneTxt.post(  Runnable(){
-                PhoneTxt.setText(tel)
-            })
+            PhoneTxt.setText(tel)
 
         }
 
