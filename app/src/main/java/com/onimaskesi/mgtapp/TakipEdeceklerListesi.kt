@@ -17,6 +17,7 @@ import com.google.android.gms.common.util.ArrayUtils.removeAll
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.activity_takip_edecekler_listesi.*
 import kotlinx.android.synthetic.main.takip_istek_pop.view.*
 import kotlinx.android.synthetic.main.takipciler.view.*
@@ -61,7 +62,7 @@ class TakipEdeceklerListesi : AppCompatActivity() {
                 }
             }
 
-        } else{
+        } else {
 
             val ilk_takipci_tel = intent.getStringExtra("takipci")
 
@@ -77,15 +78,7 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
                     if(snapshot.get("IstekVarMi") == true){
 
-                        for(takipciler in Takipci_list){
-
-                            if(takipciler.number != snapshot.get("IstekGonderenTel")){
-
-                                TakipIstegiPop()
-
-                            }
-
-                        }
+                        TakipIstegiPop()
 
                     }
 
@@ -119,6 +112,36 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
         takipciler_list.adapter = TakipciAdapter(Takipci_list, this)
 
+
+    }
+
+    fun liste_yenile_click(view: View){
+
+        Takipci_list.clear()
+
+        if(takipciMi){
+
+            db.collection("Kullanici").document(takip_edilen).collection("Takipciler").get().addOnSuccessListener { querySnapshot ->
+
+                for(document in querySnapshot ){
+
+                    listeye_takipci_ekle( numara_rehberde_mi(document.id) )
+
+                }
+            }
+
+        } else {
+
+            docRef.collection("Takipciler").get().addOnSuccessListener { querySnapshot ->
+
+                for(document in querySnapshot ){
+
+                    listeye_takipci_ekle( numara_rehberde_mi(document.id) )
+
+                }
+            }
+
+        }
 
     }
 

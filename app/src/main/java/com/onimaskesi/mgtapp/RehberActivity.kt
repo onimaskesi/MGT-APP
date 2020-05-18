@@ -248,6 +248,7 @@ class RehberActivity : AppCompatActivity() {
 
                         docRef.update("IstekGonderenTel",Telefon)
                         docRef.update("IstekVarMi",true)
+                        holder.button.isClickable = false
 
                         sharedPref.edit().putString("takip_edilen_tel",list[position].number).apply()
 

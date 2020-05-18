@@ -8,6 +8,7 @@
     android:background="#2699FB"
     tools:context=".TakipEdeceklerListesi">
 
+
     <TextView
         android:id="@+id/baslik"
         android:layout_width="match_parent"
@@ -19,6 +20,17 @@
         android:textSize="25dp"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/liste_yenile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_bg"
+        android:onClick="liste_yenile_click"
+        android:text="Yenile"
+        android:layout_gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
