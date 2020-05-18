@@ -80,12 +80,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun kayitOl_click(view: View) {
+
         val intent = Intent(applicationContext,TelefonKayitActivity ::class.java)
         startActivity(intent)
         finish()
+
     }
 
     fun girisYap_click(view : View){
+
         val telefon = PhoneTxt.text.toString()
         val parola = ParolaTxt.text.toString()
 

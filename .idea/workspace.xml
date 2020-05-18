@@ -69,90 +69,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/AnaSayfaActivity.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="56" column="36" lean-forward="true" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TakipEdeceklerListesi.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-709">
-              <caret line="137" column="102" selection-start-line="137" selection-start-column="102" selection-end-line="137" selection-end-column="102" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="123" column="18" selection-start-line="123" selection-start-column="18" selection-end-line="123" selection-end-column="18" />
+            <state relative-caret-position="274">
+              <caret line="220" column="60" lean-forward="true" selection-start-line="220" selection-start-column="60" selection-end-line="220" selection-end-column="60" />
               <folding>
-                <element signature="e#31#1103#0" expanded="true" />
+                <element signature="e#3044#3500#0" />
+                <element signature="e#3526#5201#0" />
+                <element signature="e#5227#5568#0" />
+                <element signature="e#5632#5835#0" />
+                <element signature="e#5871#5937#0" />
+                <element signature="e#6631#7495#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/ParolaOlusturmaActivity.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_takip_edecekler_listesi.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="52" column="41" lean-forward="true" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
-              <folding>
-                <element signature="e#31#425#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TelefonKayitActivity.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/MainActivity.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="39" column="60" lean-forward="true" selection-start-line="39" selection-start-column="60" selection-end-line="39" selection-end-column="60" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_rehber.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+            <state relative-caret-position="370">
+              <caret line="60" column="42" selection-start-line="60" selection-start-column="42" selection-end-line="60" selection-end-column="42" />
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/layout_bg_takippasif.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="97" selection-start-line="5" selection-start-column="97" selection-end-line="5" selection-end-column="97" />
+            <state relative-caret-position="408">
+              <caret line="137" column="32" selection-start-line="137" selection-start-column="32" selection-end-line="137" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/layout_bg_takipbekleniyor.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/AnaSayfaActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="62" selection-start-line="3" selection-start-column="62" selection-end-line="3" selection-end-column="62" />
+            <state relative-caret-position="359">
+              <caret line="152" column="12" selection-start-line="152" selection-start-column="12" selection-end-line="152" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -216,16 +173,16 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_rehber.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-v24/layout_bg_takipciler.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_ana_sayfa.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_takip_edecekler_listesi.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/ContactDTO.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/takipciler.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-v24/layout_bg.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-v24/layout_bg_takipbekleniyor.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TakipEdeceklerListesi.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/MainActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/ParolaOlusturmaActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/MainActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/AnaSayfaActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_takip_edecekler_listesi.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TakipEdeceklerListesi.kt" />
       </list>
     </option>
   </component>
@@ -240,15 +197,15 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Phone1" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-16T19:41:23.361Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-18T17:15:56.544Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
@@ -472,11 +429,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/Contact.kt" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/contact_data.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/ListAdapter.kt" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/img.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/circle.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/img.xml" />
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
@@ -498,22 +450,6 @@
           <caret line="3" column="62" lean-forward="true" selection-start-line="3" selection-start-column="62" selection-end-line="3" selection-end-column="62" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_telefon_kayit.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="1683">
-          <caret line="99" column="43" selection-start-line="99" selection-start-column="43" selection-end-line="99" selection-end-column="43" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_parola_olusturma.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/layout_bg_curve_radius.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -589,24 +525,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8182f093dc8d6edab8a2750b0bb4fae7/jetified-firebase-firestore-21.4.0/jars/classes.jar!/com/google/firebase/firestore/DocumentReference.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#10166#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8182f093dc8d6edab8a2750b0bb4fae7/jetified-firebase-firestore-21.4.0/jars/classes.jar!/com/google/firebase/firestore/core/AsyncEventListener.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#961#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -700,14 +618,6 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_takip_edecekler_listesi.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="53" column="36" lean-forward="true" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/layout_bg.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -738,6 +648,30 @@
       </provider>
       <provider selected="true" editor-type-id="android-designer2" />
     </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.core/core/1.2.0/8eb1782c02c4b7a6af797dab2a05266f385a1775/core-1.2.0-sources.jar!/androidx/core/content/ContextCompat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="258" column="44" selection-start-line="258" selection-start-column="44" selection-end-line="258" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/ParolaOlusturmaActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="52" column="41" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
+          <folding>
+            <element signature="e#31#425#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TelefonKayitActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_rehber.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -760,57 +694,123 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_telefon_kayit.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="1683">
+          <caret line="99" column="43" selection-start-line="99" selection-start-column="43" selection-end-line="99" selection-end-column="43" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_parola_olusturma.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/MainActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="39" column="60" lean-forward="true" selection-start-line="39" selection-start-column="60" selection-end-line="39" selection-end-column="60" />
+        <state relative-caret-position="909">
+          <caret line="78" column="57" selection-start-line="78" selection-start-column="57" selection-end-line="78" selection-end-column="57" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TelefonKayitActivity.kt">
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8182f093dc8d6edab8a2750b0bb4fae7/jetified-firebase-firestore-21.4.0/jars/classes.jar!/com/google/firebase/firestore/core/AsyncEventListener.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/ParolaOlusturmaActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="52" column="41" lean-forward="true" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
+        <state relative-caret-position="253">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
           <folding>
-            <element signature="e#31#425#0" expanded="true" />
+            <element signature="e#924#925#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TakipEdeceklerListesi.kt">
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8182f093dc8d6edab8a2750b0bb4fae7/jetified-firebase-firestore-21.4.0/jars/classes.jar!/com/google/firebase/firestore/util/AsyncQueue.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-709">
-          <caret line="137" column="102" selection-start-line="137" selection-start-column="102" selection-end-line="137" selection-end-column="102" />
+        <state relative-caret-position="181">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+          <folding>
+            <element signature="e#2760#2761#0" expanded="true" />
+            <element signature="e#2813#2814#0" expanded="true" />
+            <element signature="e#2898#2899#0" expanded="true" />
+            <element signature="e#7193#7194#0" expanded="true" />
+            <element signature="e#7243#7244#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.core/core/1.2.0/8eb1782c02c4b7a6af797dab2a05266f385a1775/core-1.2.0-sources.jar!/androidx/core/content/ContextCompat.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8182f093dc8d6edab8a2750b0bb4fae7/jetified-firebase-firestore-21.4.0/jars/classes.jar!/com/google/firebase/firestore/core/FirestoreClient.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="258" column="44" selection-start-line="258" selection-start-column="44" selection-end-line="258" selection-end-column="44" />
+        <state relative-caret-position="147">
+          <caret line="102" selection-start-line="102" selection-end-line="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8182f093dc8d6edab8a2750b0bb4fae7/jetified-firebase-firestore-21.4.0/jars/classes.jar!/com/google/firebase/firestore/core/ListenerRegistrationImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/content/ContextWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8182f093dc8d6edab8a2750b0bb4fae7/jetified-firebase-firestore-21.4.0/jars/classes.jar!/com/google/firebase/firestore/DocumentReference.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#10166#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8182f093dc8d6edab8a2750b0bb4fae7/jetified-firebase-firestore-21.4.0/jars/classes.jar!/com/google/firebase/firestore/DocumentReference$$Lambda$3.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/AnaSayfaActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="56" column="36" lean-forward="true" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
+        <state relative-caret-position="359">
+          <caret line="152" column="12" selection-start-line="152" selection-start-column="12" selection-end-line="152" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/RehberActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="123" column="18" selection-start-line="123" selection-start-column="18" selection-end-line="123" selection-end-column="18" />
+        <state relative-caret-position="408">
+          <caret line="137" column="32" selection-start-line="137" selection-start-column="32" selection-end-line="137" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_takip_edecekler_listesi.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="60" column="42" selection-start-line="60" selection-start-column="42" selection-end-line="60" selection-end-column="42" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onimaskesi/mgtapp/TakipEdeceklerListesi.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="220" column="60" lean-forward="true" selection-start-line="220" selection-start-column="60" selection-end-line="220" selection-end-column="60" />
           <folding>
-            <element signature="e#31#1103#0" expanded="true" />
+            <element signature="e#3044#3500#0" />
+            <element signature="e#3526#5201#0" />
+            <element signature="e#5227#5568#0" />
+            <element signature="e#5632#5835#0" />
+            <element signature="e#5871#5937#0" />
+            <element signature="e#6631#7495#0" />
           </folding>
         </state>
       </provider>

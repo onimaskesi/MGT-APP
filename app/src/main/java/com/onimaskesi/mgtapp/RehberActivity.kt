@@ -35,6 +35,7 @@ class RehberActivity : AppCompatActivity() {
     val userList : MutableList<ContactDTO> = ArrayList()
     lateinit var docRef : DocumentReference
     lateinit var registration : ListenerRegistration
+    lateinit var takip_edilen : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -124,13 +125,31 @@ class RehberActivity : AppCompatActivity() {
 
                     //go list activity as a takipci
 
+                    takip_edilen = sharedPref.getString("takip_edilen_tel","null") as String
+                    if(takip_edilen != "null"){
+
+                        //toast(takip_edilen)
+                        registration.remove()
+                        val intent = Intent(applicationContext, TakipEdeceklerListesi::class.java)
+                        intent.putExtra("tel",Telefon)
+                        intent.putExtra("takipciMi",true)
+                        intent.putExtra("takip_edilen_tel",takip_edilen)
+                        startActivity(intent)
+                        finish()
+
+                    }else{
+                        toast("shared Pref hatası!!(rehber 132)")
+                    }
+
+
+
                 }else if(snapshot.get("AtilanIstekKabulEdildiMi").toString() == "0"){
 
+                    registration.remove()
                     toast("Istek Reddedildi!")
                     val intent = Intent(applicationContext, AnaSayfaActivity::class.java)
                     intent.putExtra("tel",Telefon)
                     startActivity(intent)
-                    registration.remove()
                     finish()
                 }
                 //intent değişimlerine registration.remove() ekle
@@ -229,6 +248,8 @@ class RehberActivity : AppCompatActivity() {
 
                         docRef.update("IstekGonderenTel",Telefon)
                         docRef.update("IstekVarMi",true)
+
+                        sharedPref.edit().putString("takip_edilen_tel",list[position].number).apply()
 
                         holder.button.setBackgroundResource(R.drawable.layout_bg_takipbekleniyor)
                         holder.button.text = "Bekleniyor..."

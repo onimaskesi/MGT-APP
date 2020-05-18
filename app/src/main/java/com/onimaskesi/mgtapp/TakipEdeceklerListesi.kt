@@ -29,6 +29,8 @@ class TakipEdeceklerListesi : AppCompatActivity() {
     lateinit var docRef : DocumentReference
     val userList : MutableList<ContactDTO> = mutableListOf()
     lateinit var registration : ListenerRegistration
+    var takipciMi : Boolean = false
+    var takip_edilen = "yok"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,40 +42,60 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
         sharedPref = getSharedPreferences("mgt-shared",0)
 
-
-        val ilk_takipci_tel = intent.getStringExtra("takipci")
+        takipciMi = intent.getBooleanExtra("takipciMi",false)
 
         CreateUserList()
 
+        if(takipciMi){
 
-        listeye_takipci_ekle(ilk_takipci_tel)
+            baslatBtn.isClickable = false
+            baslatBtn.setBackgroundResource(R.drawable.layout_bg_takippasif)
 
-        registration = docRef.addSnapshotListener { snapshot, e ->
+            takip_edilen = intent.getStringExtra("takip_edilen_tel") as String
+            db.collection("Kullanici").document(takip_edilen).collection("Takipciler").get().addOnSuccessListener { querySnapshot ->
 
-            if (e != null) {
-                toast("Takip isteği dinleme hatası!")
+                for(document in querySnapshot ){
+
+                    listeye_takipci_ekle( numara_rehberde_mi(document.id) )
+
+                }
             }
 
-            if (snapshot != null && snapshot.exists()) {
+        } else{
 
-                if(snapshot.get("IstekVarMi") == true){
+            val ilk_takipci_tel = intent.getStringExtra("takipci")
 
-                    for(takipciler in Takipci_list){
+            listeye_takipci_ekle(ilk_takipci_tel)
 
-                        if(takipciler.number != snapshot.get("IstekGonderenTel")){
+            registration = docRef.addSnapshotListener { snapshot, e ->
 
-                            TakipIstegiPop()
+                if (e != null) {
+                    toast("Takip isteği dinleme hatası!")
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+
+                    if(snapshot.get("IstekVarMi") == true){
+
+                        for(takipciler in Takipci_list){
+
+                            if(takipciler.number != snapshot.get("IstekGonderenTel")){
+
+                                TakipIstegiPop()
+
+                            }
 
                         }
 
                     }
 
+                } else {
+                    toast( "İstek durumu null !")
                 }
-
-            } else {
-                toast( "İstek durumu null !")
             }
+
         }
+
 
     }
 
@@ -184,7 +206,7 @@ class TakipEdeceklerListesi : AppCompatActivity() {
                 return userInRehber.name
             }
         }
-        return "NO"
+        return istekGonderenTel
     }
 
     private fun toast(msg: String){
@@ -193,15 +215,26 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
     fun iptal_click(view: View){
 
-        registration.remove()
-        Takipci_list.clear()
+        if(takipciMi){
 
-        for(takipci in Takipci_list){
-
-            docRef.collection("Takipciler").document(takipci.number).delete().addOnFailureListener { exception ->
+            db.collection("Kullanici").document(takip_edilen).collection("Takipciler").document(Telefon).delete().addOnFailureListener { exception ->
                 toast(exception.localizedMessage.toString())
             }
+
+        }else{
+
+            registration.remove()
+
+            for(takipci in Takipci_list){
+
+                docRef.collection("Takipciler").document(takipci.number).delete().addOnFailureListener { exception ->
+                    toast(exception.localizedMessage.toString())
+                }
+            }
+
         }
+
+        Takipci_list.clear()
 
         val intent = Intent(applicationContext, AnaSayfaActivity::class.java)
         intent.putExtra("tel",Telefon)
@@ -211,7 +244,13 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
     fun baslat_click(view: View){
 
-        registration.remove()
+        if(!takipciMi){
+
+            toast("Takip ediliyorsunuz!")
+
+        }
+
+        //registration.remove()
 
     }
 

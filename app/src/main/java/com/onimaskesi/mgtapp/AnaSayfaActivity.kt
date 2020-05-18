@@ -152,6 +152,7 @@ class AnaSayfaActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, TakipEdeceklerListesi::class.java )
             intent.putExtra("tel",Telefon)
             intent.putExtra("takipci",istekGonderenTel)
+            intent.putExtra("takipciMi",false)
             startActivity(intent)
             finish()
 
