@@ -14,10 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.common.util.ArrayUtils.removeAll
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_takip_edecekler_listesi.*
 import kotlinx.android.synthetic.main.takip_istek_pop.view.*
 import kotlinx.android.synthetic.main.takipciler.view.*
@@ -115,7 +112,7 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
     }
 
-    fun liste_yenile_click(view: View){
+    fun liste_yenile(){
 
         Takipci_list.clear()
 
@@ -142,6 +139,11 @@ class TakipEdeceklerListesi : AppCompatActivity() {
             }
 
         }
+    }
+
+    fun liste_yenile_click(view: View){
+
+        liste_yenile()
 
     }
 
@@ -182,21 +184,25 @@ class TakipEdeceklerListesi : AppCompatActivity() {
             docRef.update("IstekVarMi",false)
             db.collection("Kullanici").document(istekGonderenTel).update("AtilanIstekKabulEdildiMi",1)
 
-            registration.remove()
+            db.collection("Kullanici").document(istekGonderenTel).get().addOnSuccessListener { documents ->
 
-            val takipci_values = hashMapOf(
+                var takipci_location = documents.get("konum") as GeoPoint
 
-                "Telefon" to istekGonderenTel
+                val takipci_values = hashMapOf(
 
-            )
+                    "Telefon" to istekGonderenTel,
+                    "konum" to takipci_location
+                )
 
-            val takipciler = docRef.collection("Takipciler")
+                val takipciler = docRef.collection("Takipciler")
 
-            takipciler.document(istekGonderenTel).set(takipci_values).addOnSuccessListener {
+                takipciler.document(istekGonderenTel).set(takipci_values).addOnSuccessListener {
 
-            }.addOnFailureListener { exception ->
+                }.addOnFailureListener { exception ->
 
-                toast(exception.localizedMessage.toString())
+                    toast(exception.localizedMessage.toString())
+
+                }
 
             }
 
@@ -269,7 +275,9 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
         if(!takipciMi){
 
-            toast("Takip ediliyorsunuz!")
+            liste_yenile()
+            //toast("Takip ediliyorsunuz!")
+
 
         }
 
