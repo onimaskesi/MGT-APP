@@ -41,8 +41,8 @@ class ParolaOlusturmaActivity : AppCompatActivity() {
                 "telefon" to phoneNumber,
                 "parola" to parola,
                 "AktifMi" to false,
-                "IstekVarMi" to false //,
-                //"IstekGonderenTel" to null as String
+                "IstekVarMi" to false,
+                "Rota_sayisi" to 0
             )
             kullanici.document(phoneNumber).set(data1).addOnCompleteListener { task ->
 

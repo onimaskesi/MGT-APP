@@ -1,7 +1,11 @@
 package com.onimaskesi.mgtapp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.common.util.ArrayUtils.removeAll
 import com.google.firebase.firestore.*
+import com.mapbox.mapboxsdk.geometry.LatLng
 import kotlinx.android.synthetic.main.activity_takip_edecekler_listesi.*
 import kotlinx.android.synthetic.main.takip_istek_pop.view.*
 import kotlinx.android.synthetic.main.takipciler.view.*
@@ -23,16 +28,57 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
     private lateinit var db : FirebaseFirestore
     lateinit var Telefon : String
+    lateinit var Konum : GeoPoint
     var Takipci_list : MutableList<ContactDTO> = ArrayList()
     lateinit var docRef : DocumentReference
     val userList : MutableList<ContactDTO> = mutableListOf()
-    lateinit var registration : ListenerRegistration
+    lateinit var takip_istek_dinleme : ListenerRegistration
+    lateinit var navigasyon_baslama_dinleme : ListenerRegistration
+    var rota_sayisi = 0
     var takipciMi : Boolean = false
     var takip_edilen = "yok"
 
+    //private lateinit var mMap: GoogleMap
+    lateinit var locationManager : LocationManager
+    lateinit var locationListener: LocationListener
+
+    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_takip_edecekler_listesi)
+
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        locationListener = object : LocationListener{
+
+            override fun onLocationChanged(location: Location?) {
+
+                Konum = GeoPoint(location!!.latitude,location!!.longitude)
+                docRef.update("konum",Konum)
+
+            }
+
+            override fun onProviderDisabled(provider: String?) {
+
+            }
+
+            override fun onProviderEnabled(provider: String?) {
+
+            }
+
+            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+
+            }
+        }
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 15f, locationListener) // 10 saniye veya 15 metrede bir konum güncellemesi
+        val lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+
+        if(lastLocation != null){
+
+            Konum = GeoPoint(lastLocation.latitude,lastLocation.longitude)
+            //val lastLocationLatLng = LatLng(lastLocation.latitude,lastLocation.longitude)//LatLng(lastLocation.latitude,lastLocation.longitude)
+            //mMap.addCircle(CircleOptions().fillColor(rgb(38,153,251)).visible(true).center(lastLocationLatLng).radius(2.0).clickable(true))
+        }
 
         db = FirebaseFirestore.getInstance()
         Telefon = intent.getStringExtra("tel")
@@ -49,7 +95,9 @@ class TakipEdeceklerListesi : AppCompatActivity() {
             baslatBtn.isClickable = false
             baslatBtn.setBackgroundResource(R.drawable.layout_bg_takippasif)
 
-            takip_edilen = intent.getStringExtra("takip_edilen_tel") as String
+            takip_edilen = intent.getStringExtra("takip_edilen_tel") as String //rehberden tekip isteği attığı son kişiyi takip edilen olarak alır
+
+            //takipci listesini firebaseden çekerek gösteriyor
             db.collection("Kullanici").document(takip_edilen).collection("Takipciler").get().addOnSuccessListener { querySnapshot ->
 
                 for(document in querySnapshot ){
@@ -59,13 +107,34 @@ class TakipEdeceklerListesi : AppCompatActivity() {
                 }
             }
 
+            //navigasyonun başlayıp baslamadığını dinler
+            navigasyon_baslama_dinleme = db.collection("Kullanici").document(takip_edilen).addSnapshotListener { snapshot, e ->
+
+                if (e != null) {
+                    toast("dinleme hatası!")
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+
+                    if(snapshot.get("Navigasyon_basladi_mi") == true){
+
+                        //navigasyonu başlat (varış noktasını her 15m de bir yenileyerek)
+                        toast("TAKİP BAŞLADI...")
+
+                    }
+
+                } else {
+                    toast( "navigasyon baslama durumu null !")
+                }
+            }
+
         } else {
 
             val ilk_takipci_tel = intent.getStringExtra("takipci")
 
             listeye_takipci_ekle(ilk_takipci_tel)
 
-            registration = docRef.addSnapshotListener { snapshot, e ->
+            takip_istek_dinleme = docRef.addSnapshotListener { snapshot, e ->
 
                 if (e != null) {
                     toast("Takip isteği dinleme hatası!")
@@ -85,7 +154,6 @@ class TakipEdeceklerListesi : AppCompatActivity() {
             }
 
         }
-
 
     }
 
@@ -229,6 +297,10 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
     fun numara_rehberde_mi(istekGonderenTel : String): String {
 
+        if(istekGonderenTel == Telefon){
+            return "Ben"
+        }
+
         for (userInRehber in userList){
 
             if(userInRehber.number == istekGonderenTel){
@@ -252,11 +324,12 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
         }else{
 
-            registration.remove()
+            takip_istek_dinleme.remove()
+            docRef.update("Navigasyon_basladi_mi",false)
 
             for(takipci in Takipci_list){
 
-                docRef.collection("Takipciler").document(takipci.number).delete().addOnFailureListener { exception ->
+                docRef.collection("Takipciler")!!.document(takipci.number).delete().addOnFailureListener { exception ->
                     toast(exception.localizedMessage.toString())
                 }
             }
@@ -276,9 +349,32 @@ class TakipEdeceklerListesi : AppCompatActivity() {
         if(!takipciMi){
 
             liste_yenile()
+            docRef.update("Navigasyon_basladi_mi",true)
+
+            docRef.get().addOnSuccessListener { documents ->
+
+                rota_sayisi =  documents.getLong("Rota_sayisi")!!.toInt()
+                rota_sayisi++
+                toast(rota_sayisi.toString())
+                docRef.update("Rota_sayisi", rota_sayisi)
+
+                val Rota_values = hashMapOf(
+
+                    "0" to Konum
+                )
+
+                val rotalar = docRef.collection("Rotalar")
+
+                rotalar.document("Rota${rota_sayisi}").set(Rota_values).addOnSuccessListener {
+
+                }.addOnFailureListener { exception ->
+
+                    toast(exception.localizedMessage.toString())
+
+                }
+            }
+
             //toast("Takip ediliyorsunuz!")
-
-
         }
 
         //registration.remove()

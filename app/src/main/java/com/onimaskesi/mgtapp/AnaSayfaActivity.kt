@@ -17,6 +17,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.ListenerRegistration
+import com.mapbox.android.core.location.LocationEngineResult
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.Mapbox
@@ -32,7 +33,7 @@ import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions
 import kotlinx.android.synthetic.main.takip_istek_pop.*
 import kotlinx.android.synthetic.main.takip_istek_pop.view.*
 import kotlinx.android.synthetic.main.takip_istek_pop.view.KabulBtn
-
+import java.lang.ref.WeakReference
 
 
 class AnaSayfaActivity : AppCompatActivity() , PermissionsListener , OnMapReadyCallback {
@@ -113,6 +114,10 @@ class AnaSayfaActivity : AppCompatActivity() , PermissionsListener , OnMapReadyC
     }
 
     fun numara_rehberde_mi(istekGonderenTel : String): String {
+
+        if(istekGonderenTel == Telefon){
+            return "Ben"
+        }
 
         for (userInRehber in userList){
 
@@ -241,6 +246,8 @@ class AnaSayfaActivity : AppCompatActivity() , PermissionsListener , OnMapReadyC
 
             mAlertDialog.dismiss()
 
+            docRef.update("Navigasyon_basladi_mi",false)
+
             val intent = Intent(applicationContext, TakipEdeceklerListesi::class.java )
             intent.putExtra("tel",Telefon)
             intent.putExtra("takipci",istekGonderenTel)
@@ -354,4 +361,5 @@ class AnaSayfaActivity : AppCompatActivity() , PermissionsListener , OnMapReadyC
         super.onLowMemory()
         mapView!!.onLowMemory()
     }
+
 }
