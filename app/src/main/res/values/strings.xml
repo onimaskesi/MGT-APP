@@ -2,4 +2,5 @@
     <string name="app_name">MGT APP</string>
     <string name="access_token_mapbox">pk.eyJ1Ijoib25pbWFza2VzaSIsImEiOiJja2FqcmsxN3EwZGl4MnJqdTJqOGcyMDVjIn0.lRUXgG7p8f-jkeaoyIv8AA</string>
     <string name="user_location_permission_explanation">Uygulamayı kullanabilmek için konum izni vermelisiniz!!</string>
+    <string name="title_activity_lider_navigation">TakipEdiliyorsunuz</string>
 </resources>

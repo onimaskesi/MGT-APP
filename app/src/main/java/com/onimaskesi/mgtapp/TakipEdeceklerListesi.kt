@@ -118,7 +118,7 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
                     if(snapshot.get("Navigasyon_basladi_mi") == true){
 
-                        //navigasyonu başlat (varış noktasını her 15m de bir yenileyerek)
+                        //navigasyonu başlat (takipçi tarafının intenti)
                         toast("TAKİP BAŞLADI...")
 
                     }
@@ -367,17 +367,22 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
                 rotalar.document("Rota${rota_sayisi}").set(Rota_values).addOnSuccessListener {
 
+                    //googlemap intente geçiş
+                    takip_istek_dinleme.remove()
+                    val intent = Intent(applicationContext, LiderNavigation::class.java)
+                    intent.putExtra("tel",Telefon)
+                    startActivity(intent)
+                    finish()
+
                 }.addOnFailureListener { exception ->
 
                     toast(exception.localizedMessage.toString())
 
                 }
+
             }
 
-            //toast("Takip ediliyorsunuz!")
         }
-
-        //registration.remove()
 
     }
 
