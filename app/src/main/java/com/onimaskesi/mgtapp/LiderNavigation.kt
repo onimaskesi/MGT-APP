@@ -20,8 +20,14 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import android.R.color
+import android.content.Intent
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.firestore.ListenerRegistration
+import android.icu.lang.UProperty.DASH
+import com.google.android.gms.maps.model.PatternItem
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
@@ -38,6 +44,7 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
     var Takipci_circle_array : MutableList<Circle> = ArrayList()
 
     var takipci_konumları_dinleme_array : MutableList<ListenerRegistration> = ArrayList()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,8 +113,7 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
                             if (snapshot != null && snapshot.exists()) {
 
                                 //eğer takipçilerin konum değişikliği var ise haritada işaretle
-                                val yeni_konum = snapshot.get("konum") as GeoPoint
-                                takipcileri_haritada_goster(yeni_konum.latitude,yeni_konum.longitude)
+                                takipcileri_goster()
 
                             }
 
@@ -135,13 +141,6 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
 
             }
 
-            fun dinleyicileri_kapat(){
-
-                for(dinleyici in takipci_konumları_dinleme_array){
-                    dinleyici.remove()
-                }
-
-            }
 
             override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
 
@@ -188,7 +187,8 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
 
     fun takipcileri_goster(){
 
-        //her bir takipçiyi harita ilk açıldığında göster
+        //her bir takipçiyi harita göster
+        takipci_circle_temizle()
         docRef.collection("Takipciler").get().addOnSuccessListener { querySnapshot ->
 
             for(document in querySnapshot ){
@@ -207,13 +207,19 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
 
     fun takipcileri_haritada_goster(lat: Double, long : Double){
 
+        var locationLatLng = LatLng(lat,long)
+        val circle = mMap.addCircle(CircleOptions().fillColor(rgb(255,0,0)).visible(true).center(locationLatLng).radius(10.0))
+        circle.zIndex = 1F
+        Takipci_circle_array.add(circle)
+    }
+
+    fun takipci_circle_temizle(){
+
         for(circles in Takipci_circle_array){
             circles.remove()
         }
+        Takipci_circle_array.clear()
 
-        var locationLatLng = LatLng(lat,long)
-        val circle = mMap.addCircle(CircleOptions().fillColor(rgb(255,0,0)).visible(true).center(locationLatLng).radius(10.0))
-        Takipci_circle_array.add(circle)
     }
 
     override fun onRequestPermissionsResult(
@@ -235,6 +241,43 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
         }
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    fun dinleyicileri_kapat(){
+
+        for(dinleyici in takipci_konumları_dinleme_array){
+            dinleyici.remove()
+        }
+
+    }
+
+    fun exit_navigation_click(view : View){
+
+        dinleyicileri_kapat()
+        docRef.update("Navigasyon_basladi_mi",false)
+
+        //databesedeki takipciler listesini sil
+        docRef.collection("Takipciler").get().addOnSuccessListener { querySnapshot ->
+
+            for(takipci_no in querySnapshot ){
+
+                docRef.collection("Takipciler")!!.document(takipci_no.id).delete().addOnFailureListener { exception ->
+                    toast(exception.localizedMessage.toString())
+                }
+
+            }
+        }
+
+        PointsArray.clear()
+        Takipci_circle_array.clear()
+        takipci_konumları_dinleme_array.clear()
+
+        val intent = Intent(applicationContext, AnaSayfaActivity::class.java)
+        intent.putExtra("tel",Telefon)
+        startActivity(intent)
+        finish()
+        //takipcilere rota kayıt etmek istermisiniz popup durumları...
+
     }
 
     private fun toast(msg: String){
