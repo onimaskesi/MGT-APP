@@ -318,6 +318,8 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
         if(takipciMi){
 
+            navigasyon_baslama_dinleme.remove()
+
             db.collection("Kullanici").document(takip_edilen).collection("Takipciler").document(Telefon).delete().addOnFailureListener { exception ->
                 toast(exception.localizedMessage.toString())
             }

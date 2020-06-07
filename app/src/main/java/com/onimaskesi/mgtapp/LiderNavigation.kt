@@ -15,12 +15,13 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CircleOptions
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
+import android.R.color
+import android.widget.Toast
+import com.google.firebase.firestore.ListenerRegistration
 
 
 class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
@@ -32,6 +33,11 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     lateinit var locationManager : LocationManager
     lateinit var locationListener: LocationListener
+
+    var PointsArray : MutableList<LatLng> = ArrayList()
+    var Takipci_circle_array : MutableList<Circle> = ArrayList()
+
+    var takipci_konumları_dinleme_array : MutableList<ListenerRegistration> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,21 +57,12 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        docRef.collection("Takipciler").get().addOnSuccessListener { querySnapshot ->
+        //firebase rota kayıt için index
+        var point_index = 0
 
-            for(document in querySnapshot ){
-
-                docRef.collection("Takipciler").document( document.id ).get().addOnSuccessListener { documents ->
-
-                    var location  = documents.get("konum") as GeoPoint
-                    var locationLatLng = LatLng(location.latitude,location.longitude)
-                    mMap.addCircle(CircleOptions().fillColor(rgb(255,0,0)).visible(true).center(locationLatLng).radius(10.0))
-
-                }
-
-            }
-        }
-
+        //rota polyline ayarlamaları
+        val lineOptions = PolylineOptions().width(20F).color(rgb(38,153,251))
+        var lineRoute = mMap.addPolyline(lineOptions)
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
@@ -74,13 +71,75 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
 
                 //mMap.clear()
 
+                takipcileri_goster()
+
+                val locationLatLng = LatLng(location?.latitude!!,location.longitude)
+                val locationGeoPoint = GeoPoint(location?.latitude!!,location.longitude)
+                //  rota oluşturma(polyline çizme)
+
+                PointsArray.add( locationLatLng )
+                lineRoute.points = PointsArray
+                lineRoute.isVisible = true
+
+                //  firebasedeki rotalara point kaydı
+                point_index += 1
+                docRef.get().addOnSuccessListener { documents ->
+
+                    val rota_no = documents.getLong("Rota_sayisi")!!.toInt()
+
+                    docRef.collection("Rotalar").document("Rota${rota_no}").update(point_index.toString(),locationGeoPoint)
+
+                }
+
+                //takipçilerin konum güncellemelerini dinleme ve haritada gösterme
+                docRef.collection("Takipciler").get().addOnSuccessListener { querySnapshot ->
+
+                    for(takipci_no in querySnapshot ){
+
+                        //her bir takipçi için konum değişikliği dinleme
+
+                        val dinleyici = docRef.collection("Takipciler").document(takipci_no.id).addSnapshotListener{snapshot, exception ->
+
+                            if (exception != null) {
+                                toast(exception.toString())
+                            }
+                            if (snapshot != null && snapshot.exists()) {
+
+                                //eğer takipçilerin konum değişikliği var ise haritada işaretle
+                                val yeni_konum = snapshot.get("konum") as GeoPoint
+                                takipcileri_haritada_goster(yeni_konum.latitude,yeni_konum.longitude)
+
+                            }
+
+                        }
+                        takipci_konumları_dinleme_array.add(dinleyici)
+
+
+                    }
+                }
+
+
+
+                // Set listeners for click events.
+                //mMap.setOnPolylineClickListener(this)
+                //mMap.setOnPolygonClickListener(this)
+
+
                 val userLocation = LatLng(location?.latitude!!,location.longitude)
 
                 mMap.addCircle(CircleOptions().fillColor(rgb(38,153,251)).visible(true).center(userLocation).radius(10.0))
                 //mMap.addMarker(MarkerOptions().position(userLocation))
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,15f))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,17f))
 
 
+
+            }
+
+            fun dinleyicileri_kapat(){
+
+                for(dinleyici in takipci_konumları_dinleme_array){
+                    dinleyici.remove()
+                }
 
             }
 
@@ -127,7 +186,35 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,18f))*/
     }
 
+    fun takipcileri_goster(){
 
+        //her bir takipçiyi harita ilk açıldığında göster
+        docRef.collection("Takipciler").get().addOnSuccessListener { querySnapshot ->
+
+            for(document in querySnapshot ){
+
+                docRef.collection("Takipciler").document( document.id ).get().addOnSuccessListener { documents ->
+
+
+                    var location  = documents.get("konum") as GeoPoint
+                    takipcileri_haritada_goster(location.latitude,location.longitude)
+
+                }
+
+            }
+        }
+    }
+
+    fun takipcileri_haritada_goster(lat: Double, long : Double){
+
+        for(circles in Takipci_circle_array){
+            circles.remove()
+        }
+
+        var locationLatLng = LatLng(lat,long)
+        val circle = mMap.addCircle(CircleOptions().fillColor(rgb(255,0,0)).visible(true).center(locationLatLng).radius(10.0))
+        Takipci_circle_array.add(circle)
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -148,6 +235,10 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
         }
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun toast(msg: String){
+        Toast.makeText(this,msg, Toast.LENGTH_LONG).show()
     }
 
 }
