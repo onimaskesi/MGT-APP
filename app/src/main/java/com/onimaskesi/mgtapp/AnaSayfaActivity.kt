@@ -182,7 +182,6 @@ class AnaSayfaActivity : AppCompatActivity() , PermissionsListener , OnMapReadyC
         }
     }
 
-
     fun TakipIstegiPop(){
 
         var istekGonderenTel = ""
@@ -290,7 +289,7 @@ class AnaSayfaActivity : AppCompatActivity() , PermissionsListener , OnMapReadyC
     fun logOut_click(view : View){
         //auth.signOut()
 
-       makeOfflineTheUser()
+        makeOfflineTheUser()
 
         sharedPref.edit().putBoolean("giris",false).apply()
 
@@ -300,6 +299,8 @@ class AnaSayfaActivity : AppCompatActivity() , PermissionsListener , OnMapReadyC
     }
 
     fun Kayitli_rotalar_click(view: View){
+
+
 
     }
 
