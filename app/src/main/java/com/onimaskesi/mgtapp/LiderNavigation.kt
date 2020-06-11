@@ -193,7 +193,7 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
 
             for(document in querySnapshot ){
 
-                docRef.collection("Takipciler").document( document.id ).get().addOnSuccessListener { documents ->
+                db.collection("Kullanici").document( document.id ).get().addOnSuccessListener { documents ->
 
 
                     var location  = documents.get("konum") as GeoPoint

@@ -119,7 +119,7 @@ class TakipEdeceklerListesi : AppCompatActivity() {
                     if(snapshot.get("Navigasyon_basladi_mi") == true){
 
                         //navigasyonun başlaması halinde TakipciNavigasyon aktivitesine giderek takipci navigasyonunu başlat (takipçi tarafının intenti)
-                        val intent = Intent(applicationContext, TakipciNavigasyon::class.java)
+                        val intent = Intent(applicationContext, TakipciHarita::class.java)
                         intent.putExtra("tel",Telefon)
                         intent.putExtra("takip_edilen_tel",takip_edilen)
                         startActivity(intent)

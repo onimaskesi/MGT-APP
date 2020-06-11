@@ -1,7 +1,13 @@
 package com.onimaskesi.mgtapp
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
@@ -30,7 +36,6 @@ import com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage
 
 // rota hesaplamak için sınıflar
-import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute
 import com.mapbox.api.directions.v5.models.DirectionsResponse
@@ -43,14 +48,20 @@ import android.util.Log
 // navigasyon arayüzünü(navigation UI) başlatmak için gerekli sınıflar
 import android.view.View
 import android.widget.Button
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
-import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher
+import com.mapbox.services.android.navigation.ui.v5.*
+import com.mapbox.services.android.navigation.ui.v5.listeners.NavigationListener
+import com.mapbox.services.android.navigation.v5.routeprogress.RouteProgress
+import com.mapbox.services.android.navigation.v5.routeprogress.RouteProgressState
+import com.mapbox.turf.TurfMeasurement
 import com.onimaskesi.mgtapp.R
 
 
-class TakipciNavigasyon:AppCompatActivity(), OnMapReadyCallback, PermissionsListener {
+class TakipciNavigasyon:AppCompatActivity(), OnMapReadyCallback, PermissionsListener, OnNavigationReadyCallback {
 
     private lateinit var db: FirebaseFirestore
     lateinit var Telefon: String
@@ -92,11 +103,12 @@ class TakipciNavigasyon:AppCompatActivity(), OnMapReadyCallback, PermissionsList
         mapView!!.onCreate(savedInstanceState)
         mapView!!.getMapAsync(this)
 
-
     }
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(mapboxMap:MapboxMap) {
         this.mapboxMap = mapboxMap
+
         mapboxMap.setStyle(getString(R.string.navigation_guidance_day)
         ) { style ->
             enableLocationComponent(style)
@@ -104,67 +116,57 @@ class TakipciNavigasyon:AppCompatActivity(), OnMapReadyCallback, PermissionsList
             //addDestinationIconSymbolLayer(style)
 
             //navigasyon varış ve başlangıç noktalarının ayarlanması
-            //ilk olarak varış noktası olarak databaseden takip edeceği kullanıcının rotalar kısmından ilk konumunu alır
+            //başlangıç noktası olarak kendi konumunu, varış noktası olarak ise databaseden takip edeceği kullanıcının konumunu alır
 
-
-            point_index++
-            //liderin rota sayısından en son oluşturduğu rotanın indexini çekerek o rotanın konumlarına(points) ulaşıp docRefPoints ile konumlara erişimi sağlama
             docRefLider.get().addOnSuccessListener { documents ->
-                val Rota_index = documents.getLong("Rota_sayisi")!!.toInt()
-                val docRefPoints = docRefLider.collection("Rotalar").document("Rota${Rota_index}")
 
-                docRefPoints.get().addOnSuccessListener { points ->
-                    //ilk konumdan navige etmeye başlayıp aradaki mesafe 5m altına düşerse bir sonraki konum var mı diye bakıp var ise navigasyona onunla devam edilecek
+                val destinationGeoPoint = documents.get("konum") as GeoPoint
 
-                    val destinationGeoPoint = points.get(point_index.toString()) as GeoPoint
+                val destination = Point.fromLngLat(destinationGeoPoint.longitude, destinationGeoPoint.latitude)
+                val origin = Point.fromLngLat(locationComponent!!.lastKnownLocation!!.longitude,
+                    locationComponent!!.lastKnownLocation!!.latitude
+                )
 
+                //rota oluşturma ve navigasyonu başlatma işlemleri
 
-                    val destination = Point.fromLngLat(destinationGeoPoint.longitude, destinationGeoPoint.latitude)
-                    val origin = Point.fromLngLat(locationComponent!!.lastKnownLocation!!.longitude,
-                        locationComponent!!.lastKnownLocation!!.latitude
-                    )
+                NavigationRoute.builder(this)
+                    .accessToken(Mapbox.getAccessToken()!!)
+                    .origin(origin)
+                    .destination(destination)
+                    .build()
+                    .getRoute(object:Callback<DirectionsResponse> {
+                        override fun onResponse(call:Call<DirectionsResponse>, response:Response<DirectionsResponse>) {
+                            // You can get the generic HTTP info about the response
+                            Log.d(TAG, "Response code: " + response.code())
+                            if (response.body() == null) {
+                                Log.e(TAG, "No routes found, make sure you set the right user and access token.")
+                                return
+                            } else if (response.body()!!.routes().size < 1) {
+                                Log.e(TAG, "No routes found")
+                                return
+                            }
 
-                    //rota oluşturma ve navigasyonu başlatma işlemleri
+                            currentRoute = response.body()!!.routes()[0]
 
-                    NavigationRoute.builder(this)
-                        .accessToken(Mapbox.getAccessToken()!!)
-                        .origin(origin)
-                        .destination(destination)
-                        .build()
-                        .getRoute(object:Callback<DirectionsResponse> {
-                            override fun onResponse(call:Call<DirectionsResponse>, response:Response<DirectionsResponse>) {
-                                // You can get the generic HTTP info about the response
-                                Log.d(TAG, "Response code: " + response.code())
-                                if (response.body() == null) {
-                                    Log.e(TAG, "No routes found, make sure you set the right user and access token.")
-                                    return
-                                } else if (response.body()!!.routes().size < 1) {
-                                    Log.e(TAG, "No routes found")
-                                    return
-                                }
-
-                                currentRoute = response.body()!!.routes()[0]
-
-                                // Draw the route on the map
-                                if (navigationMapRoute != null){
-                                    navigationMapRoute!!.removeRoute()
-                                } else {
-                                    navigationMapRoute = mapView?.let {
-                                        mapboxMap?.let { it1 ->
-                                            NavigationMapRoute(null,
-                                                it, it1, R.style.NavigationMapRoute)
-                                        }
+                            // Draw the route on the map
+                            if (navigationMapRoute != null){
+                                navigationMapRoute!!.removeRoute()
+                            } else {
+                                navigationMapRoute = mapView?.let {
+                                    mapboxMap?.let { it1 ->
+                                        NavigationMapRoute(null,
+                                            it, it1, R.style.NavigationMapRoute)
                                     }
                                 }
-                                navigationMapRoute!!.addRoute(currentRoute)
-                                navigeEt()
                             }
+                            navigationMapRoute!!.addRoute(currentRoute)
+                            navigeEt()
+                        }
 
-                            override fun onFailure(call:Call<DirectionsResponse>, throwable:Throwable) {
-                                Log.e(TAG, "Error: " + throwable.message)
-                            }
-                        })
-                }
+                        override fun onFailure(call:Call<DirectionsResponse>, throwable:Throwable) {
+                            Log.e(TAG, "Error: " + throwable.message)
+                        }
+                    })
 
             }
 
@@ -180,6 +182,19 @@ class TakipciNavigasyon:AppCompatActivity(), OnMapReadyCallback, PermissionsList
             .shouldSimulateRoute(simulateRoute)
             .build()
         // Call this method with Context from within an Activity
+
+        /*
+        val Viewoptions = NavigationViewOptions.builder()
+        Viewoptions.progressChangeListener { location, routeProgress ->
+            if(routeProgress.currentState()?.equals(RouteProgressState.ROUTE_ARRIVED)!!){
+                toast("VARDINIZ!!!")
+            }
+        }
+        Viewoptions.directionsRoute(currentRoute).shouldSimulateRoute(simulateRoute)
+
+        navigationView.startNavigation(Viewoptions.build())
+         */
+
         NavigationLauncher.startNavigation(this, options)
 
     }
@@ -201,7 +216,10 @@ class TakipciNavigasyon:AppCompatActivity(), OnMapReadyCallback, PermissionsList
             var lastKnownLocation = locationComponent!!.lastKnownLocation
             var lklLat = lastKnownLocation!!.latitude
             var lklLong = lastKnownLocation!!.longitude
-            toast(lklLat.toString() + "  " + lklLong.toString())
+            //toast(lklLat.toString() + "  " + lklLong.toString())
+            var konum = GeoPoint(lklLat,lklLong)
+            docRef.update("konum",konum)
+            docRefLider.collection("Takipciler").document(Telefon).update("konum",konum)
         }
         else
         {
@@ -265,6 +283,10 @@ class TakipciNavigasyon:AppCompatActivity(), OnMapReadyCallback, PermissionsList
 
     companion object {
         private val TAG = "DirectionsActivity"
+    }
+
+    override fun onNavigationReady(isRunning: Boolean) {
+
     }
 
 }

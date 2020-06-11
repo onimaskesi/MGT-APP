@@ -20,6 +20,7 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.mapbox.android.core.location.LocationEngineResult
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
+import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.location.LocationComponent
 import com.mapbox.mapboxsdk.location.LocationComponentOptions
@@ -30,6 +31,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher
 import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions
+import com.mapbox.turf.TurfMeasurement
 import kotlinx.android.synthetic.main.takip_istek_pop.*
 import kotlinx.android.synthetic.main.takip_istek_pop.view.*
 import kotlinx.android.synthetic.main.takip_istek_pop.view.KabulBtn
@@ -69,6 +71,13 @@ class AnaSayfaActivity : AppCompatActivity() , PermissionsListener , OnMapReadyC
         makeOnlineTheUser()
 
         CreateUserList()
+
+        /*
+        var mesafe = TurfMeasurement.distance( Point.fromLngLat(29.280846,40.658615) , Point.fromLngLat(29.2807788,40.6584993))
+        toast(mesafe.toString())
+        // 10m-15m yaklaşık olarak => 0.01406311 => 0.015
+         */
+
 
         mapView = findViewById(R.id.mapView)
         mapView!!.onCreate(savedInstanceState)
