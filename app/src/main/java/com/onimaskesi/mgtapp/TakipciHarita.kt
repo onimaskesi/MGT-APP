@@ -3,6 +3,7 @@ package com.onimaskesi.mgtapp
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
@@ -20,10 +21,14 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.common.reflect.TypeToken
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import java.lang.reflect.Type
 
 class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
 
@@ -33,6 +38,7 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
     lateinit var docRefLider : DocumentReference
     private lateinit var db: FirebaseFirestore
     lateinit var Telefon: String
+    lateinit var sharedPref: SharedPreferences
     lateinit var takip_edilen: String
     lateinit var lider_konum_dinleme : ListenerRegistration
     lateinit var liderLocation : GeoPoint
@@ -55,6 +61,9 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
 
         db = FirebaseFirestore.getInstance()
         Telefon = intent.getStringExtra("tel") as String
+
+        sharedPref = getSharedPreferences("mgt-shared",0)
+
         takip_edilen = intent.getStringExtra("takip_edilen_tel")
         docRef = db.collection("Kullanici").document(Telefon)
         docRefLider = db.collection("Kullanici").document(takip_edilen)
@@ -95,7 +104,7 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
         //diğer kullanıcıları göster (sarı)
         takipcileri_goster()
 
-
+        //eğer liderin konum değişikliği var ise haritada işaretle
         lider_konum_dinleme = docRefLider.addSnapshotListener{snapshot, e ->
 
             if (e != null) {
@@ -103,7 +112,6 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
             }
             if (snapshot != null && snapshot.exists()) {
 
-                //eğer liderin konum değişikliği var ise haritada işaretle
 
                 if(liderLocation != snapshot.get("konum")){
 
@@ -111,21 +119,18 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
                     val LiderLatLng = LatLng(liderLocation.latitude, liderLocation.longitude)
                     mMap.addCircle(CircleOptions().fillColor(Color.rgb(255, 0, 0)).visible(true).center(LiderLatLng).radius(10.0).clickable(true))
 
-                    PointsArray.add( LiderLatLng )
-                    lineRoute.points = PointsArray
-                    lineRoute.isVisible = true
-
+                    //Point_array_set(LiderLatLng)
                 }
 
             }
 
         }
-
+        
         locationListener = object : LocationListener{
 
             override fun onLocationChanged(location: Location?) {
 
-                toast(Rota_index.toString())
+                //toast(Rota_index.toString())
 
                 val locationLatLng = LatLng(location!!.latitude,location!!.longitude)
 
@@ -136,8 +141,12 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
 
                 takipcileri_goster()
 
+                //Point_array_get()
                 lineRoute.points = PointsArray
                 lineRoute.isVisible = true
+
+                //lineRoute.points = PointsArray
+                //lineRoute.isVisible = true
 
                 /*
                 docRefLider.collection("Rotalar").document("Rota${Rota_index}").get().addOnSuccessListener { documents ->
@@ -227,6 +236,18 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
             }
             Takipci_circle_array.clear()
         }
+
+    }
+
+    fun takipci_navigasyon_click(view : View){
+
+        lider_konum_dinleme.remove()
+
+        val intent = Intent(applicationContext, TakipciNavigasyon::class.java)
+        intent.putExtra("tel",Telefon)
+        intent.putExtra("takip_edilen_tel",takip_edilen)
+        startActivity(intent)
+        finish()
 
     }
 

@@ -2,6 +2,7 @@ package com.onimaskesi.mgtapp
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -196,6 +197,16 @@ class TakipciNavigasyon:AppCompatActivity(), OnMapReadyCallback, PermissionsList
          */
 
         NavigationLauncher.startNavigation(this, options)
+
+    }
+
+    fun haritaya_geri_click(view:View){
+
+        val intent = Intent(applicationContext, TakipciHarita::class.java)
+        intent.putExtra("tel",Telefon)
+        intent.putExtra("takip_edilen_tel",takip_edilen)
+        startActivity(intent)
+        finish()
 
     }
 

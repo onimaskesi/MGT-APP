@@ -54,6 +54,7 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
         Telefon = intent.getStringExtra("tel") as String
         docRef = db.collection("Kullanici").document(Telefon)
 
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -95,6 +96,7 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
                     val rota_no = documents.getLong("Rota_sayisi")!!.toInt()
 
                     docRef.collection("Rotalar").document("Rota${rota_no}").update(point_index.toString(),locationGeoPoint)
+                    docRef.collection("Rotalar").document("Rota${rota_no}").update("point_index",point_index)
 
                 }
 
@@ -283,5 +285,7 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
     private fun toast(msg: String){
         Toast.makeText(this,msg, Toast.LENGTH_LONG).show()
     }
+
+    fun exit_takipci_navigation_click(view: View) {}
 
 }

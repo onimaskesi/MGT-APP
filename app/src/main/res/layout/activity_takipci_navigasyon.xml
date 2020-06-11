@@ -14,17 +14,17 @@
         mapbox:mapbox_cameraZoom="12" />
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/backButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/gray"
-        android:enabled="false"
-        android:text="Navigasyonu Başlat"
+        android:background="@drawable/layout_bg_haritaya_geri_btn"
+        android:enabled="true"
+        android:onClick="haritaya_geri_click"
+        android:text="Haritaya Geri Dön"
         android:textColor="@color/white"
+        android:textStyle="bold"
         mapbox:layout_constraintStart_toStartOf="parent"
         mapbox:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
