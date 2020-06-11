@@ -68,10 +68,12 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
         docRef = db.collection("Kullanici").document(Telefon)
         docRefLider = db.collection("Kullanici").document(takip_edilen)
 
+        /*
         docRefLider.get().addOnSuccessListener { documents ->
             Rota_index = documents.getLong("Rota_sayisi")!!.toInt()
 
         }
+        */
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -84,9 +86,11 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
+        /*
         //rota polyline ayarlamaları
         val lineOptions = PolylineOptions().width(20F).color(Color.rgb(255, 0, 0)).visible(true)
         var lineRoute = mMap.addPolyline(lineOptions)
+         */
 
         //liderin konumunu göster (kırmızı)
         docRefLider.get().addOnSuccessListener { documents ->
@@ -95,9 +99,11 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
             val liderLatLng = LatLng(liderLocation.latitude, liderLocation.longitude)
             mMap.addCircle(CircleOptions().fillColor(Color.rgb(255, 0, 0)).visible(true).center(liderLatLng).radius(10.0).clickable(true))
 
+            /*
             PointsArray.add( liderLatLng )
             lineRoute.points = PointsArray
             lineRoute.isVisible = true
+             */
 
         }
 
@@ -119,7 +125,6 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
                     val LiderLatLng = LatLng(liderLocation.latitude, liderLocation.longitude)
                     mMap.addCircle(CircleOptions().fillColor(Color.rgb(255, 0, 0)).visible(true).center(LiderLatLng).radius(10.0).clickable(true))
 
-                    //Point_array_set(LiderLatLng)
                 }
 
             }
@@ -141,6 +146,7 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
 
                 takipcileri_goster()
 
+                /*
                 //Point_array_get()
                 lineRoute.points = PointsArray
                 lineRoute.isVisible = true
@@ -148,7 +154,7 @@ class TakipciHarita : AppCompatActivity(), OnMapReadyCallback {
                 //lineRoute.points = PointsArray
                 //lineRoute.isVisible = true
 
-                /*
+
                 docRefLider.collection("Rotalar").document("Rota${Rota_index}").get().addOnSuccessListener { documents ->
                     var i = 0
                     while(documents.get(i.toString()) != liderLocation){

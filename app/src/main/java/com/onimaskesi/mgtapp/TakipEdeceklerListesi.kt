@@ -3,6 +3,7 @@ package com.onimaskesi.mgtapp
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -29,6 +30,7 @@ class TakipEdeceklerListesi : AppCompatActivity() {
     private lateinit var db : FirebaseFirestore
     lateinit var Telefon : String
     lateinit var Konum : GeoPoint
+    lateinit var sharedPref: SharedPreferences
     var Takipci_list : MutableList<ContactDTO> = ArrayList()
     lateinit var docRef : DocumentReference
     val userList : MutableList<ContactDTO> = mutableListOf()
@@ -357,11 +359,19 @@ class TakipEdeceklerListesi : AppCompatActivity() {
             liste_yenile()
             docRef.update("Navigasyon_basladi_mi",true)
 
+            //googlemap intente geçiş
+            takip_istek_dinleme.remove()
+            val intent = Intent(applicationContext, LiderNavigation::class.java)
+            intent.putExtra("tel",Telefon)
+            startActivity(intent)
+            finish()
+
+            /*
             docRef.get().addOnSuccessListener { documents ->
 
                 rota_sayisi =  documents.getLong("Rota_sayisi")!!.toInt()
                 rota_sayisi++
-                toast(rota_sayisi.toString())
+                //toast(rota_sayisi.toString())
                 docRef.update("Rota_sayisi", rota_sayisi)
 
                 val Rota_values = hashMapOf(
@@ -386,7 +396,7 @@ class TakipEdeceklerListesi : AppCompatActivity() {
 
                 }
 
-            }
+            }*/
 
         }
 

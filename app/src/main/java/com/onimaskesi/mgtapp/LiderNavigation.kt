@@ -65,12 +65,14 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        /*
         //firebase rota kayıt için index
         var point_index = 0
 
         //rota polyline ayarlamaları
         val lineOptions = PolylineOptions().width(20F).color(rgb(38,153,251))
         var lineRoute = mMap.addPolyline(lineOptions)
+         */
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
@@ -81,6 +83,7 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
 
                 takipcileri_goster()
 
+                /*
                 val locationLatLng = LatLng(location?.latitude!!,location.longitude)
                 val locationGeoPoint = GeoPoint(location?.latitude!!,location.longitude)
                 //  rota oluşturma(polyline çizme)
@@ -100,6 +103,8 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
 
                 }
 
+                 */
+
                 //takipçilerin konum güncellemelerini dinleme ve haritada gösterme
                 docRef.collection("Takipciler").get().addOnSuccessListener { querySnapshot ->
 
@@ -107,7 +112,7 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
 
                         //her bir takipçi için konum değişikliği dinleme
 
-                        val dinleyici = docRef.collection("Takipciler").document(takipci_no.id).addSnapshotListener{snapshot, exception ->
+                        val dinleyici = db.collection("Kullanici").document(takipci_no.id).addSnapshotListener{snapshot, exception ->
 
                             if (exception != null) {
                                 toast(exception.toString())
@@ -125,13 +130,6 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
 
                     }
                 }
-
-
-
-                // Set listeners for click events.
-                //mMap.setOnPolylineClickListener(this)
-                //mMap.setOnPolygonClickListener(this)
-
 
                 val userLocation = LatLng(location?.latitude!!,location.longitude)
 
@@ -178,13 +176,6 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
-
-        /*
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        //mMap.addCircle(CircleOptions().fillColor(rgb(38,153,251)).visible(true).center(userLocation).radius(2.0))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,18f))*/
     }
 
     fun takipcileri_goster(){
@@ -272,20 +263,24 @@ class LiderNavigation : AppCompatActivity(), OnMapReadyCallback {
 
         PointsArray.clear()
         Takipci_circle_array.clear()
-        takipci_konumları_dinleme_array.clear()
+
+        for(takipci_dinleme in takipci_konumları_dinleme_array){
+
+            takipci_dinleme.remove()
+
+        }
+
 
         val intent = Intent(applicationContext, AnaSayfaActivity::class.java)
         intent.putExtra("tel",Telefon)
         startActivity(intent)
         finish()
-        //takipcilere rota kayıt etmek istermisiniz popup durumları...
+
 
     }
 
     private fun toast(msg: String){
         Toast.makeText(this,msg, Toast.LENGTH_LONG).show()
     }
-
-    fun exit_takipci_navigation_click(view: View) {}
 
 }

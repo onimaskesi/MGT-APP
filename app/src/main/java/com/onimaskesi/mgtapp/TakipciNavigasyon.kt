@@ -177,7 +177,7 @@ class TakipciNavigasyon:AppCompatActivity(), OnMapReadyCallback, PermissionsList
 
     fun navigeEt(){
 
-        val simulateRoute = true
+        val simulateRoute = false
         val options = NavigationLauncherOptions.builder()
             .directionsRoute(currentRoute)
             .shouldSimulateRoute(simulateRoute)

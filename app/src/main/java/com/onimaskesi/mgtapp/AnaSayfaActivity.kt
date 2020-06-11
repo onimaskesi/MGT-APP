@@ -307,12 +307,6 @@ class AnaSayfaActivity : AppCompatActivity() , PermissionsListener , OnMapReadyC
         finish()
     }
 
-    fun Kayitli_rotalar_click(view: View){
-
-
-
-    }
-
     fun Rehber_click(view: View){
 
         makeOfflineTheUser()
